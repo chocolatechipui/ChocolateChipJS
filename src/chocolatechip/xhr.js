@@ -84,7 +84,7 @@
       });
     }
   });
-  $.extend($.xhr, {
+  $.extend($.ajax, {
     // Parameters: url, data, success, dataType.
     get : function ( url, data, success, dataType ) {
       if (!url) {
