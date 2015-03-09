@@ -1258,21 +1258,6 @@ Version: 3.8.2
       });
       return ret.length ? ret.unique() : this;
     },
-    
-    off : function( event, selector, callback, capturePhase ) {
-      if (!this.length) return [];
-      var ret = [];
-      this.each(function(ctx) {
-        if (typeof selector === 'function' || !selector) {
-          $(ctx).unbind(event, selector, callback);
-          ret.push(ctx);
-        } else {
-          $(ctx).undelegate(selector, event, callback, capturePhase);
-          ret.push(ctx);
-        }
-      });
-      return ret.length ? ret : this;
-    },
            
     clone : function ( value ) {
       if (!this.length) return [];
@@ -1543,6 +1528,21 @@ Version: 3.8.2
           ret.push(ctx);
         } else {
           $(ctx).delegate(selector, event, callback, capturePhase);
+          ret.push(ctx);
+        }
+      });
+      return ret.length ? ret : this;
+    },
+    
+    off : function( event, selector, callback, capturePhase ) {
+      if (!this.length) return [];
+      var ret = [];
+      this.each(function(ctx) {
+        if (typeof selector === 'function' || !selector) {
+          $(ctx).unbind(event, selector, callback);
+          ret.push(ctx);
+        } else {
+          $(ctx).undelegate(selector, event, callback, capturePhase);
           ret.push(ctx);
         }
       });
