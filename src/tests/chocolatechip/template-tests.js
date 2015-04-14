@@ -102,6 +102,41 @@ test('$.template() should parse custom data variable.', function() {
    equal(result[0].firstElementChild.innerHTML, '<h3>Joe</h3><h4>100</h4>', 'First list item should be: <h3>Joe</h3><h4>100</h4>');
    equal(result[0].lastElementChild.innerHTML, '<h3>Tom</h3><h4>32</h4>', 'First list item should be: <h3>Tom</h3><h4>32</h4>');
 });
+// 7 
+test('$.template.repeater() should throw error for data that is not an Array', function() {
+   stop();
+   var data = {name: 'Joe', age: 100};
+   $.templates.templ8_5 = '<li>[[= data.name ]]</li>';
+   var result = $.template.repeater($('#template'), $.templates.templ8_5, data);
+   start();
+   equal(result, '$.template.repeater() requires data of type Array.', 'Shoud throw an exception.')
+});
+// 8
+test('$.template.repeater() should render array of objects', function() {
+   stop();
+   var data = [{firstName: "Wobba", lastName: "the Great"},{firstName: "Billy", lastName: "the Kid"},{firstName: "Bozo", lastName: "the Clown"}];
+   $.templates.templ8_6 = '<li>[[= data.firstName ]], [[= data.lastName]]</li>';
+   $.template.repeater($('#template'), $.templates.templ8_6, data);
+   var result = $('#template')[0];
+   start();
+   equal(result.children[0].innerHTML, 'Wobba, the Great', 'Should be: "Wobba, the Great"');
+   equal(result.children[1].innerHTML, 'Billy, the Kid', 'Should be: "Billy, the Kid"');
+   equal(result.children[2].innerHTML, 'Bozo, the Clown', 'Should be: "Bozo, the Clown"');
+});
+// 9 
+test('$.template.repeater() should render simple array of data', function() {
+   stop();
+   var data = ['One','Two', 'Three', 'Four', 'Five'];
+   $.templates.templ8_7 = '<li>[[= data ]]</li>';
+   $.template.repeater($('#template'),$.templates.templ8_7, data);
+   var result = $('#template')[0];
+   start();
+   equal(result.children[0].innerHTML, 'One', 'Should be: "One"');
+   equal(result.children[1].innerHTML, 'Two', 'Should be: "Two"');
+   equal(result.children[2].innerHTML, 'Three', 'Should be: "Three"');
+   equal(result.children[3].innerHTML, 'Four', 'Should be: "Four"');
+   equal(result.children[4].innerHTML, 'Five', 'Should be: "Five"');
+});
 
 
 

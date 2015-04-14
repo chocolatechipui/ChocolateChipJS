@@ -1,6 +1,21 @@
 (function(){
   "use strict";
   $.extend($, {
+    /*
+      options = {
+        url : 'the/path/here',
+        type : ('GET', 'POST', PUT, 'DELETE'),
+        data : myData,
+        async : 'synch' || 'asynch',
+        user : username (string),
+        password : password (string),
+        dataType : ('html', 'json', 'text', 'script', 'xml', 'form'),
+        headers : {},
+        success : callbackForSuccess,
+        error : callbackForError,
+        context: null
+      }
+    */
     ajax: function(options) {
       if (!options) throw('No options where provided to xhr request.');
       if (typeof options !== 'object') throw('Expected an object as argument for options, received something else.');
@@ -27,6 +42,7 @@
         text:   'text/plain'
       };
 
+      // Create a new Promise object:
       return new Promise(function(resolve, reject) {
         var xhr = new XMLHttpRequest();
         var type = settings.type || 'get';
@@ -84,7 +100,7 @@
       });
     }
   });
-  $.extend($.xhr, {
+  $.extend($.ajax, {
     // Parameters: url, data, success, dataType.
     get : function ( url, data, success, dataType ) {
       if (!url) {
