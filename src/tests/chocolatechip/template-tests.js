@@ -156,6 +156,14 @@ test('$.template.data["luminaries"] should be undefined after rendering declarat
    start();
    equal($.template.data['luminaries'], undefined, "$.template.data['luminaries'] should be undefined");
 });
-
-
-
+// 12
+test('$.template.index value should increment with each iteration of repeater', function() {
+   stop();
+   $.template.data['indexValue'] = [{firstName: "Albert", lastName: "Einstein"},{firstName: "Steven", lastName: "Hawking"},{firstName: "Neil", lastName: "deGrasse Tyson"}];
+   $.template.repeater();
+   start();
+   var result = $('#repeater2')[0];
+   equal(result.children[0].innerHTML, '1', 'Should be: "1"');
+   equal(result.children[1].innerHTML, '2', 'Should be: "2"');
+   equal(result.children[2].innerHTML, '3', 'Should be: "3"');
+});

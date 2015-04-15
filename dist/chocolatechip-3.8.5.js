@@ -10,7 +10,7 @@
 ChocolateChip.js
 Copyright 2015 Sourcebits www.sourcebits.com
 License: MIT
-Version: 3.8.4
+Version: 3.8.5
 */
 (function() {
   'use strict';
@@ -130,7 +130,7 @@ Version: 3.8.4
 
   $.extend({
  
-    version : "3.8.4",
+    version : "3.8.5",
     
     libraryName : 'ChocolateChip',
     
