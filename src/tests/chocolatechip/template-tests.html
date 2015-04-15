@@ -7,6 +7,9 @@
       <!-- any HTML you want to be present in each test (will be reset for each test) -->
       <ul id='template'>
       </ul>
+      <ul id="repeater" data-repeater="luminaries" class='cloak'>
+        <li>[[= data.firstName ]], [[= data.lastName]]</li>
+      </ul>
     </div>
     <script src='template-tests.js'></script>
   </body>

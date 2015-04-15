@@ -137,6 +137,25 @@ test('$.template.repeater() should render simple array of data', function() {
    equal(result.children[3].innerHTML, 'Four', 'Should be: "Four"');
    equal(result.children[4].innerHTML, 'Five', 'Should be: "Five"');
 });
+// 10
+test('$.template.repeater() with parameters should render a declarative repeater', function() {
+   stop();
+   $.template.data['luminaries'] = [{firstName: "Albert", lastName: "Einstein"},{firstName: "Steven", lastName: "Hawking"},{firstName: "Neil", lastName: "deGrasse Tyson"}];
+   $.template.repeater();
+   var result = $('#repeater')[0];
+   start();
+   equal(result.children[0].innerHTML, 'Albert, Einstein', 'Should be: "Albert, Einstein"');
+   equal(result.children[1].innerHTML, 'Steven, Hawking', 'Should be: "Steven, Hawking"');
+   equal(result.children[2].innerHTML, 'Neil, deGrasse Tyson', 'Should be: "Neil, deGrasse Tyson"');
+});
+// 11
+test('$.template.data["luminaries"] should be undefined after rendering declarative repeater template', function() {
+   stop();
+   $.template.data['luminaries'] = [{firstName: "Albert", lastName: "Einstein"},{firstName: "Steven", lastName: "Hawking"},{firstName: "Neil", lastName: "deGrasse Tyson"}];
+   $.template.repeater();
+   start();
+   equal($.template.data['luminaries'], undefined, "$.template.data['luminaries'] should be undefined");
+});
 
 
 
