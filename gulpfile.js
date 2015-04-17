@@ -12,9 +12,9 @@ var gulp = require('gulp')
 ,   header = require('gulp-header')
 ,   footer = require('gulp-footer')
 ,   version = pkg.version
-,   promiseSupport = false
-,   promises = "src/chocolatechip/deferred.js"
-,   ajax = "src/chocolatechip/ajax.js"
+,   deferredSupport = false
+,   promises = "src/chocolatechip/promises.js"
+,   ajax = "src/chocolatechip/xhr.js"
 ,   del = require('del');
 
 //Add Trailing slash to projectPath if not exists.
@@ -68,10 +68,10 @@ gulp.task('js', function () {
   ].join('\n');
   var chuijs_end = '\n\}\)\();';
 
-  var promiseSupport = gutils.env.promiseSupport;
-  if (promiseSupport) {
-    promises = "src/chocolatechip/promises.js";
-    ajax = "src/chocolatechip/xhr.js"
+  var deferredSupport = gutils.env.deferredSupport;
+  if (deferredSupport) {
+    promises = "src/chocolatechip/deferred.js";
+    ajax = "src/chocolatechip/ajax.js"
   }
 
   gulp.src([
@@ -153,10 +153,10 @@ gulp.task('tests', function() {
     .pipe(gulp.dest('forms/'));
 
   setTimeout(function() {
-    if (gutils.env.promiseSupport) {
-      del(['tests/chocolatechip/deferred-tests.html', 'tests/chocolatechip/deferred-tests.js']);
-    } else {
+    if (gutils.env.deferredSupport) {
       del(['tests/chocolatechip/promises-tests.html', 'tests/chocolatechip/promises-tests.js']);
+    } else {
+      del(['tests/chocolatechip/deferred-tests.html', 'tests/chocolatechip/deferred-tests.js']);
     }
 
   }, 2000);

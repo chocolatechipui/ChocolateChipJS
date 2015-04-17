@@ -38,15 +38,13 @@ gulp
 
 ###Support for ECMAScript 6 Promises
 
-By default ChocolateChipJS provides a deferred object that is feature compatible with jQuery's version and it's Ajax methods return deferred objects as well. If you want, you can build ChocolateChipJS with support for the ECMAScript 6 Promises API. This will work both in browsers that support the new Promises API, and by a pollyfil, with older browsers that do not. Also, when building ChocolateChipJS with Promises, its Ajax methods are also refactored to use the new API.
-
-To build ChocolateChipJS with support for ECMAScript Promises, pass it the flag, `promiseSupport`:
+By default ChocolateChipJS provides support for ECMAScript 6 promises. If you prefer to use the older, jQuery-style deferred object syntax, you can build a version of ChocolateChipJS with support for it using the flag, `deferredSupport`:
 
 ```
-gulp --promiseSupport true
+gulp --deferredSupport true
 ```
 
-This will replace the jQuery deferred object and Ajax methods with the pollyfil, Ajax methods and unit tests for the ECMAScript Pomises API.
+This will replace the ECMAScript 6 style promses and Ajax behavior with jQuery-style deferred object and Ajax methods.
 
 
 ###Note
@@ -67,5 +65,3 @@ git config core.autocrlf input
 
 core.eol tells Git to always checkout this repository with LF. 
 core.autocrlf tells Git to convert CRLF to LF on commit.
-
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/2f123684cf50f62013c044733bfc36fb "githalytics.com")](http://githalytics.com/sourcebitsllc/chocolatechip-ui)
