@@ -139,7 +139,20 @@
     
     chch_cache : {},
     
-    fn : {}
+    fn : {},
+
+    each : function ( array, callback ) {
+      if (!array || !$.isArray(array)) return;
+      var value;
+      var i = 0;
+      var length = array.length;
+      for ( ; i < length; i++ ) {
+        value = callback.call( array[ i ], array[ i ], i );
+        if ( value === false ) {
+          break;
+        }
+      }
+    }
     
   });
 })();
