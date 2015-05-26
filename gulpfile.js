@@ -107,7 +107,13 @@ gulp.task('js', function () {
     .pipe(uglify())
     .pipe(header(chocolatechipjsHeaderMin, { pkg : pkg, chuiName: pkg.title }))
     .pipe(rename("chocolatechip-" + pkg.version + ".min.js"))
-    .pipe(gulp.dest(pkg.projectPath + './dist/'))
+    .pipe(gulp.dest(pkg.projectPath + './dist/'));
+
+  gulp.src(["src/typings/*"])
+    .pipe(gulp.dest(pkg.projectPath + './dist/typings'));
+  gulp.src(["src/typings/*/**"])
+    .pipe(gulp.dest(pkg.projectPath + './dist/typings'));
+
 });
 
 

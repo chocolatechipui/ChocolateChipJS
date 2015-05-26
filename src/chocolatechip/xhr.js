@@ -66,8 +66,7 @@
 
         // Get the protocol being used:
         protocol = /^([\w-]+:)\/\//.test(settings.url) ? RegExp.$1 : window.location.protocol;
-        // Send request:
-
+        
         // Handle load success:
         xhr.onload = function() {
           if (xhr.status === 200 && xhr.status < 300 && xhr.readyState === 4 || xhr.status === 304 && xhr.readyState === 4 || (xhr.status === 0 && protocol === 'file:')) {

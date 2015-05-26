@@ -25,6 +25,7 @@
           ret.push(ctx);
         }
       });
+      ret.sort(function(a, b) { return a - b; });
       return ret.length ? ret : [];
     },
     
