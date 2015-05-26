@@ -1,4 +1,4 @@
-// Type definitions for chocolatechip 3.8.7
+// Type definitions for chocolatechip 3.8.8
 // Project: http://chocolatechip-ui.com/
 
 /**
