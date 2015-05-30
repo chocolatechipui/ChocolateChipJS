@@ -214,7 +214,7 @@ interface ChocolateChipStatic {
    *
    * param newContent The content to insert. May be an HTML string, DOM element, or an array of DOM elements.
    */
-  replace(newELement:HTMLElement, oldElement: HTMLElement): void;
+  replace(newELement: HTMLElement, oldElement: HTMLElement): void;
 
   /**
    * Perform an asynchronous HTTP (Ajax) request.
@@ -228,7 +228,7 @@ interface ChocolateChipStatic {
    * @param success A callback function that is executed if the request succeeds.
    * @param dataType The type of data expected from the server. Default: Intelligent Guess (json, or html).
    */
-  get(url: string, data?:any, success?: (data: any) => any, dataType?: string): Promise<any>;
+  get(url: string, data?: any, success?: (data: any) => any, dataType?: string): Promise<any>;
 
   /**
    * Load data from the server using a HTTP POST request.
@@ -247,7 +247,7 @@ interface ChocolateChipStatic {
    * @param data A plain object or string that is sent to the server with the request.
    * @param success A callback function that is executed if the request succeeds.
    */
-  getJSON(url: string, data?:any, success?: (data: any) => any): Promise<any>;
+  getJSON(url: string, data?: any, success?: (data: any) => any): Promise<any>;
 
   /**
    *  Load JSON from a remote server using the JSONP technique.
@@ -294,6 +294,9 @@ interface ChocolateChipStatic {
    */
   (elementArray: ChocolateChipElementArray): ChocolateChipElementArray;
 
+  /**
+   * If no argument is provided, return the document as a ChocolateChipElementArray.
+   */
   (): Document[];
 
   /**
@@ -564,6 +567,7 @@ interface ChocolateChipAjaxSettings {
    * infer it based on the MIME type of the response.
    */
   dataType?: string;
+  
   /**
    * The type of request to make ("POST" or "GET"), default is "GET". Note: Other HTTP request methods,
    * such as PUT and DELETE, can also be used here, but they are not supported by all browsers.
@@ -630,6 +634,7 @@ interface ChocolateChipElementArray extends Array<HTMLElement> {
    */
   //each(Function: (ctx: any, idx: number) => void, ChocolateChipStatic: any): void;
   each(func: (ctx: any, idx: number) => any): void;
+
   /**
    * Sorts an array and removes duplicates before returning it.
    */
@@ -948,6 +953,7 @@ interface ChocolateChipElementArray extends Array<HTMLElement> {
    * Get the current value of the first element in the set of matched elements.
    */
   val(): any;
+
   /**
    * Set the value of each element in the set of matched elements.
    *
