@@ -585,6 +585,7 @@
     
     dataset : function ( key, value ) {
       if (!this.length) return [];
+      if(!document.body.dataset) return [];
       var ret = [];
       if (typeof value === 'string' && value.length >= 0) {
         this.each(function(node) {
