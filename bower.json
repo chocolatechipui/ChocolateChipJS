@@ -1,14 +1,14 @@
 {
   "name": "chocolatechipjs",
-  "version": "1.0.0",
+  "version": "3.8.10",
   "homepage": "https://github.com/chocolatechipui/ChocolateChipJS",
   "authors": [
     "sourcebits-robertbiggs <robert.biggs@sourcebits.com>"
   ],
   "description": "A JavaScript library for mobile Web app development.",
   "main": [
-    "dist/chocolatechip-3.8.9.js",
-    "dist/chocolatechip-3.8.9.min.js",
+    "dist/chocolatechip-3.8.10.js",
+    "dist/chocolatechip-3.8.10.min.js",
     "dist/typings/tsd.d.ts",
     "dist/typings/chocolatechip/chocolatechip.d.ts",
   ],
@@ -19,7 +19,6 @@
   ],
   "license": "MIT",
   "ignore": [
-    ".*",
     "**/.*",
     "forms",
     "node_modules",
