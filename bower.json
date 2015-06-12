@@ -10,7 +10,7 @@
     "dist/chocolatechip-3.8.10.js",
     "dist/chocolatechip-3.8.10.min.js",
     "dist/typings/tsd.d.ts",
-    "dist/typings/chocolatechip/chocolatechip.d.ts",
+    "dist/typings/chocolatechip/chocolatechip.d.ts"
   ],
   "keywords": [
     "javascript",
