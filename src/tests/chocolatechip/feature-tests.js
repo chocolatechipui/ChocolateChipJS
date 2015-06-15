@@ -114,3 +114,15 @@ test('Test for Chrome in user agent string.', function(){
    var isChrome = /chrome/img.test(userAgent);
    equal(isChrome, true, 'Should return true.');
 });
+// 20
+test('Test for IE Trident in user agent string.', function(){
+   var userAgent = 'Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; ARM; Touch; IEMobile/10.0;';
+   var isTrident = /trident/img.test(userAgent);
+   equal(isTrident, true, 'Should return true.');
+});
+// 21
+test('Test for Microsoft Edge in user agent string.', function(){
+   var userAgent = 'Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; DEVICE INFO) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Mobile Safari/537.36 Edge/12.0';
+   var isEdge = /edge/img.test(userAgent);
+   equal(isEdge, true, 'Should return true.');
+});
