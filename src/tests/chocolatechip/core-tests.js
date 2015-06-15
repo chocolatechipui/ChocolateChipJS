@@ -1,7 +1,7 @@
 module('Core Tests');
 // 1
 test('Returns version of ChocolateChip', function() {
-   equal($.version, '3.8.7', 'Should be 3.8.7')
+   equal($.version, '3.8.11', 'Should be 3.8.11')
 });
 // 2
 test('Returns name of library (ChocolateChip)', function() {
