@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='content-type' content='text/html; charset=utf-8'>
+    <title>QUnit ChocolateChipJS</title>
+    <link rel='stylesheet' href='../qunit/qunit.css'>
+    <script src='../../dist/chocolatechipjs-4.0.0.js'></script>
+    <script src='../qunit/qunit.js'></script>
+</head>
+  <body>
+    <h1 id='qunit-header2'>QUnit ChocolateChipJS: Templates</h1>
+    <div id="qunit">
+    </div> <!-- QUnit fills this with results, etc -->
+    <div id='qunit-fixture'>
+ 
+      <!-- any HTML you want to be present in each test (will be reset for each test) -->
+      <ul id='template'>
+      </ul>
+      <ul id="repeater" data-repeater="luminaries" class='cloak'>
+        <li>[[= data.firstName ]], [[= data.lastName]]</li>
+      </ul>
+      <ul id="repeater2" data-repeater="indexValue" class='cloak'>
+        <li>[[= $.template.index + 1 ]]</li>
+      </ul>
+    </div>
+    <script src='template-tests.js'></script>
+  </body>
+</html>
