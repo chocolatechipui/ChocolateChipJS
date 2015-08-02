@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Examples</title>
+  <script src='../dist/chocolatechipjs-4.0.0.js'></script>
+  <style>
+    .cloak > * {
+      display: none;
+    }
+  </style>
+  <script>
+  /// <reference path='../typings/chocolatechipjs/chocolatechipjs.d.ts' />
+  $(function() {
+
+    // Define array:
+    var simpleArray = ['One','Two', 'Three', 'Four', 'Five'];
+    // Define template for repeater:
+    var repeaterTmplate1 = '<li>[[= data ]]</li>';
+    // Render repeater:
+    $.template.repeater($('#arrayList'), repeaterTmplate1, simpleArray)
+    
+    // Define array of data:
+    var arrayOfObjects = { persons:
+      [
+        {firstName: "Albert", lastName: "Einstein"},
+        {firstName: "Steven", lastName: "Hawking"},
+        {firstName: "Neil", lastName: "deGrasse Tyson"}
+      ]
+    };
+    // Define repeater template:
+    var repeaterTmplate2 = '<li>[[= data.firstName ]], [[= data.lastName]]</li>';
+    //  Render repeater:
+    $.template.repeater($('#objectArrayList'), repeaterTmplate2, arrayOfObjects.persons);
+
+    // Data for declarative repeater:
+    var renaissanceLuminaries = { persons: 
+      [
+        {firstName: "Albert", lastName: "Einstein", letter: "a"},
+        {firstName: "Steven", lastName: "Hawking", letter: "b"},
+        {firstName: "Neil", lastName: "deGrasse Tyson", letter: "c"},
+        {firstName: "Leonardo", lastName: "Da Vinci", letter: "d"},
+        {firstName: "Nicholas", lastName: "Copernicus", letter: "e"}  
+      ]
+    };
+
+    $.letters = ['a','b','c','d','e'];
+    $.template.data['luminaries'] = renaissanceLuminaries.persons;
+
+    // Parse declarative repeater:
+    $.template.repeater();
+
+    // Update repeater output:
+    var each = $('#each');
+    $.each(array, function(ctx, idx) {
+      each.append('<li><span>' + idx + ': </span>' + ctx + '</li>')
+    });
+  });
+  </script>
+</head>
+<body>
+
+  <ol id='arrayList'></ol>
+
+  <ul id="objectArrayList"></ul>
+
+  <ul data-repeater="luminaries" class='cloak'>
+    <li>[[= $.template.index+1 ]][[= $.letters[$.template.index] ]]: [[= data.firstName ]], [[= data.lastName]]</li>
+  </ul>
+
+  <ol id='each'></ol>
+
+</body>
+</html>

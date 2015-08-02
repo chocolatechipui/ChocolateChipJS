@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "es5"
+    },
+    "filesGlob": [
+        "src/typings/*/**.d.ts",
+        "src/typescript/*.ts"
+    ],
+    "files": [
+        "src/typings/chocolatechipjs/chocolatechipjs.d.ts"]
+}
