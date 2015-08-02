@@ -752,15 +752,7 @@
       });
       return $['returnResult'](ret)
     },
-<<<<<<< HEAD:src/chocolatechip/collection.js
     
-    dataset : function ( key, value ) {
-      if (!this.length) return [];
-      if(!document.body.dataset) return [];
-      var ret = [];
-      if (typeof value === 'string' && value.length >= 0) {
-=======
-
     attr : function ( property: string, value?: string ): string | ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
@@ -776,7 +768,6 @@
           return this[0].getAttribute(property);
         }
       } else {
->>>>>>> TypeScript:src/typescript/dom-methods.ts
         this.each(function(node) {
           __attr(node, property, value);
           ret.push(node);

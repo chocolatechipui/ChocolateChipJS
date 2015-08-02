@@ -1,35 +1,18 @@
 // Import modules:
-<<<<<<< HEAD
-var gulp = require('gulp');
-var pkg = require('./package.json');
-var less = require('gulp-less');
-var minifyCSS = require('gulp-minify-css');
-var gutils = require('gulp-util');
-var concat = require('gulp-concat');
-=======
 
 var gulp = require('gulp');
 var pkg = require('./package.json');
 var gutils = require('gulp-util');
 var path = require("path");
->>>>>>> TypeScript
 var rename = require('gulp-rename');
 var replace = require('gulp-replace');
 var uglify = require('gulp-uglify');
 var jshint = require('gulp-jshint');
 var header = require('gulp-header');
 var footer = require('gulp-footer');
-<<<<<<< HEAD
-var version = pkg.version;
-var deferredSupport = false;
-var promises = "src/chocolatechip/promises.js";
-var ajax = "src/chocolatechip/xhr.js";
-var del = require('del');
-=======
 var ts = require('gulp-typescript');
 var beautify = require('gulp-jsbeautifier');
 var version = pkg.version;
->>>>>>> TypeScript
 
 //Add Trailing slash to projectPath if not exists.
 if (pkg.projectPath !== "")

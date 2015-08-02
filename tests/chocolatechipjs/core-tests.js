@@ -1,11 +1,7 @@
 module('Core Tests');
 // 1
 test('Returns version of ChocolateChip', function() {
-<<<<<<< HEAD:src/tests/chocolatechip/core-tests.js
-   equal($.version, '3.8.11', 'Should be 3.8.11')
-=======
    equal($.version, '4.0.0', 'Should be 4.0.0')
->>>>>>> TypeScript:tests/chocolatechipjs/core-tests.js
 });
 // 2
 test('Returns name of library (ChocolateChip)', function() {
