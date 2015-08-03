@@ -13,7 +13,7 @@ ChocolateChipJS uses Gulpjs to build. This is a Node package, so you'll first ne
 
 ###Gulpjs
 
-On Mac OS X, you'll need to run the command in your terminal with **sudo** to avoid installation errors:
+On Mac OS X, you'll need to run the command in your terminal with **sudo** to avoid installation errors. This will require you to enter your password:
 
 ```
 shell
@@ -21,14 +21,14 @@ sudo npm install -g gulp
 ``` 
 
 
-For Windows, just runt this:
+For Windows, just run this:
 
 ```
 shell
 npm install -g gulp
 ```
 
-Enter your password when it requests. After you should see a number of Nodejs modules being installed in a folder called **node\_modules**. You do not need **node\_modules** in your final project. The node modules are there to enable the build process with Gruntjs.
+After running this command, you should see a number of Nodejs modules being installed in a folder called **node\_modules**. You do not need **node\_modules** in your final project. The node modules are there to enable the build process with Gruntjs.
 
 Now that you have the node modules install, you can just type `gulp` in the terminal and hit return/enter. 
 
@@ -38,13 +38,8 @@ gulp
 
 ###Support for ECMAScript 6 Promises
 
-By default ChocolateChipJS provides support for ECMAScript 6 promises. If you prefer to use the older, jQuery-style deferred object syntax, you can build a version of ChocolateChipJS with support for it using the flag, `deferredSupport`:
+ChocolateChipJS provides support for ECMAScript 6 promises. Since version 4.0.0 it also provides the [fetch API](https://fetch.spec.whatwg.org), a replacement for the XHTTP object that has been the basis for Ajax development. Fetch provides simple and consistent methods and patterns for all common Ajax operations. Like Promises, ChocolateChipJS includes a polyfill for browsers that do not currently support fetch.
 
-```
-gulp --deferredSupport true
-```
-
-This will replace the ECMAScript 6 style promses and Ajax behavior with jQuery-style deferred object and Ajax methods.
 
 
 ###Note
