@@ -3,6 +3,7 @@
     "target": "es5"
   },
   "files": [
-    "typings/chocolatechipjs/chocolatechipjs.d.ts"
+    "typings/chocolatechipjs/chocolatechipjs.d.ts",
+    "examples/*"
   ]
 }

@@ -7,5 +7,20 @@
         "src/typescript/*.ts"
     ],
     "files": [
-        "src/typings/chocolatechipjs/chocolatechipjs.d.ts"]
+        "src/typings/chocolatechipjs/chocolatechipjs.d.ts",
+        "src/typescript/booleans.ts",
+        "src/typescript/cache.ts",
+        "src/typescript/core.ts",
+        "src/typescript/data.ts",
+        "src/typescript/dom-methods.ts",
+        "src/typescript/events.ts",
+        "src/typescript/feature-detection.ts",
+        "src/typescript/fetch.ts",
+        "src/typescript/form.ts",
+        "src/typescript/promises.ts",
+        "src/typescript/pubsub.ts",
+        "src/typescript/strings.ts",
+        "src/typescript/template.ts",
+        "src/typescript/utils.ts"
+    ]
 }
