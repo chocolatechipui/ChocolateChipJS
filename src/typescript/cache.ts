@@ -40,7 +40,6 @@
          }
         },
 
-
         hasKey : function ( key: string ): boolean {
          if (this.keys.indexOf(key) >= 0) {
            return true;

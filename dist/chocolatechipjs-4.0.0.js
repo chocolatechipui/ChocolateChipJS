@@ -130,9 +130,9 @@ function chocolatechipjs(selector, context) {
     }
   };
 })(chocolatechipjs);
-window['chocolatechipjs'] = chocolatechipjs;
-if (typeof window['$'] === 'undefined') {
-  window['$'] = chocolatechipjs;
+window.chocolatechipjs = chocolatechipjs;
+if (typeof window.$ === 'undefined') {
+  window.$ = chocolatechipjs;
 }
 (function($) {
   $.extend($, {

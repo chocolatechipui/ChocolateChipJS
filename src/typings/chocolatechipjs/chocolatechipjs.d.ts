@@ -1393,6 +1393,10 @@ interface ChocolateChipStatic {
   }): any 
 }
 
-
+interface Window {
+  chocolatechipjs: ChocolateChipStatic;
+  $: ChocolateChipStatic;
+  jsonp: any;
+}
 declare var $: ChocolateChipStatic;
 declare var fetch: fetch;

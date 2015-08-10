@@ -19,7 +19,7 @@
     var repeaterTmplate1 = '<li>[[= data ]]</li>';
     // Render repeater:
     $.template.repeater($('#arrayList'), repeaterTmplate1, simpleArray)
-
+    
     // Define array of data:
     var arrayOfObjects = { persons:
       [
@@ -34,13 +34,13 @@
     $.template.repeater($('#objectArrayList'), repeaterTmplate2, arrayOfObjects.persons);
 
     // Data for declarative repeater:
-    var renaissanceLuminaries = { persons:
+    var renaissanceLuminaries = { persons: 
       [
         {firstName: "Albert", lastName: "Einstein", letter: "a"},
         {firstName: "Steven", lastName: "Hawking", letter: "b"},
         {firstName: "Neil", lastName: "deGrasse Tyson", letter: "c"},
         {firstName: "Leonardo", lastName: "Da Vinci", letter: "d"},
-        {firstName: "Nicholas", lastName: "Copernicus", letter: "e"}
+        {firstName: "Nicholas", lastName: "Copernicus", letter: "e"}  
       ]
     };
 
