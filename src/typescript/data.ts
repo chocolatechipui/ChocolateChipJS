@@ -1,6 +1,6 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
-(function($){
+(($) => {
   chocolatechipjs.fn.extend({
     data : function ( key: string, value?: number | string ): string | ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
@@ -43,7 +43,7 @@
       if(!document.body.dataset) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
       if (typeof value === 'string' && value.length >= 0) {
-        this.each(function(node) {
+        this.each((node) => {
           node.dataset[key] = value;
           ret.push(node);
         });
@@ -55,7 +55,7 @@
     
     removeData : function ( key: string ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
-      this.each(function(ctx) {
+      this.each((ctx) => {
         var id = ctx.getAttribute('id');
         if (!id) {
           return;

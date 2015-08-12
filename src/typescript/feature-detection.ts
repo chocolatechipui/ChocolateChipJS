@@ -1,7 +1,7 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
 
-(function($){
+(($) => {
   $.extend(chocolatechipjs, {
 
     isiPhone : /iphone/img.test(navigator.userAgent),

@@ -1,35 +1,36 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
-(function($){
+(($) => {
+  var slice = (elements: NodeList) => [].slice.apply(elements);
   $.extend($, {
 
-    libraryName : "ChocolateChip",
+    libraryName: "ChocolateChip",
 
     version: 'VERSION_NUMBER',
 
-    noop : function (): void {},
+    noop: (): void => {},
 
-    uuidNum : function ( ): string {
+    uuidNum: (): string => {
       var d = new Date().getTime();
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+      var randomLetter = charset[Math.floor(Math.random() * charset.length)];
+      return randomLetter +'xxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
           var r = (d + Math.random() * 16) % 16 | 0;
           d = Math.floor(d / 16);
           return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
       });
     },
 
-    makeUuid : function ( ): string {
-      return "chch_" +  this.uuidNum();
-    },
+    makeUuid: (): string => $.uuidNum(),
 
-    uuid : 0,
+    uuid: 0,
 
-    make: function ( HTMLString: string ): ChocolateChipElementArray[] {
+    make: ( HTMLString: string ): ChocolateChipElementArray[] => {
       var ret:any = [];
       var temp:any = document.createElement('div');
       temp.innerHTML = HTMLString;
-      temp = [].slice.apply(temp.childNodes);
-      temp.forEach(function(ctx) {
+      temp = slice(temp.childNodes);
+      temp.forEach((ctx) => {
         if (ctx.nodeType === 1) {
           ret.push(ctx);
         } else if (ctx.nodeType === 3 && ctx.nodeValue.trim().length !== 0) {
@@ -39,7 +40,7 @@
       return ret;
     },
 
-    concat : function ( args: any ): string {
+    concat: function(args: any): string {
       if (args instanceof Array) {
         return args.join('');
       } else if (args instanceof Object) {
@@ -50,11 +51,9 @@
       }
     },
 
-    html : function ( HTMLString: string ): ChocolateChipElementArray {
-      return this.make(HTMLString);
-    },
+    html: ( HTMLString: string ): ChocolateChipElementArray => $.make(HTMLString),
 
-    replace : function ( newElem: any, oldElem: any ): any {
+    replace: ( newElem: any, oldElem: any ): any => {
       if (!newElem || !oldElem) return;
        newElem = newElem.length ? newElem[0] : newElem;
        oldElem = oldElem.length ? oldElem[0] : oldElem;
@@ -62,7 +61,7 @@
        return;
     },
 
-    require : function ( src: string, callback: Function ): void {
+    require: ( src: string, callback: Function ): void => {
       callback = callback || this.noop;
       var script = document.createElement('script');
       script.setAttribute('type', 'text/javascript');
@@ -74,26 +73,26 @@
       document.getElementsByTagName('head')[0].appendChild(script);
     },
 
-    delay : function ( func: Function, milliseconds: number = 1 ): void {
+    delay: ( func: Function, milliseconds: number = 1 ): void => {
       func = func || $.noop;
       setTimeout(function() {
         func.call(func);
       }, milliseconds);
     },
 
-    defer : function ( func: Function ): Function {
+    defer: function ( func: Function ): Function {
       func = func || $.noop;
-      return this.delay.apply($, [func, 1].concat([].slice.call(arguments, 1)));
+      return $.delay.apply($, [func, 1].concat([].slice.call(arguments, 1)));
     },
 
-    returnResult: function ( result ): Array<any> {
+    returnResult: ( result ): Array<any> => {
       if (typeof result === 'string') return <any>[];
       if (result && result.length && result[0] === undefined) return <any>[];
       if (result && result.length) return result;
       else return <any>[];
     },
 
-    each : function ( array, callback ): void {
+    each: ( array, callback ): void => {
       if (!array || !$.isArray(array)) return;
       var value;
       var i = 0;

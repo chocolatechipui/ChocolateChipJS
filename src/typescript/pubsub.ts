@@ -1,11 +1,11 @@
 /// <reference path="../typings/chocolatechipjs/chocolatechipjs.d.ts"/> />
 /// <reference path='core.ts' />
-(function($){
+(($) => {
   $.extend({
 
-    subscriptions : {},
+    subscriptions: {},
 
-    subscribe : function ( topic: string, callback: Function ) {
+    subscribe: ( topic: string, callback: Function ) => {
       var token = ($['uuidNum']());
       if (!$['subscriptions'][topic]) {
         $['subscriptions'][topic] = [];
@@ -17,11 +17,11 @@
       return token;
     },
 
-    publish : function ( topic: string, args: any ) {
+    publish: ( topic: string, args: any ) => {
       if (!$['subscriptions'][topic]) {
         return false;
       }
-      setTimeout(function () {
+      setTimeout(() => {
         var len = $['subscriptions'][topic] ? $['subscriptions'][topic].length : 0;
         while (len--) {
            $['subscriptions'][topic][len].callback(topic, args);
@@ -30,7 +30,7 @@
       });
     },
 
-    unsubscribe : function ( token: any ) {
+    unsubscribe: ( token: any ) => {
       setTimeout(function() {
         for (var m in $['subscriptions']) {
           if ($['subscriptions'][m]) {

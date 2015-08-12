@@ -1,12 +1,12 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
-(function() {
+(() => {
  /*jshint validthis:true */
  var extend;
  var cycle;
  var queue;
 
-  extend = function(obj, name, val, config): Object {
+  extend = (obj, name, val, config): Object => {
     return Object.defineProperty(obj, name, {
       value: val,
       writable: true,
@@ -24,7 +24,7 @@
    }
 
    return {
-     add: function ( func: Function, self ) {
+     add: ( func: Function, self ) => {
        item = new Item(func, self);
        if (last) {
          last.next = item;
@@ -35,7 +35,7 @@
        last = item;
        item = undefined;
      },
-     unshift: function() {
+     unshift: () => {
        var f = first;
        first = last = cycle = undefined;
 

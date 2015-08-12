@@ -1,6 +1,8 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
-(function($){
+(($) => {
+  var slice = <T>(elements: T) => [].slice.apply(elements);
+
   $.fn.extend({
 
     each: function ( callback: Function, ctx: any ): ChocolateChipElementArray {
@@ -19,33 +21,29 @@
       return this;
     },
 
-    unique : function ( ): any[] {
+    unique: function ( ): any[] {
       var ret = [];
       var sort = this.sort();
-      sort.forEach(function(ctx, idx) {
+      sort.forEach((ctx, idx) => {
         if (ret.indexOf(ctx) === -1) {
           ret.push(ctx);
         }
       });
-      ret.sort(function(a, b) { return a - b; });
+      ret.sort((a, b) => a - b);
       return ret.length ? ret : [];
     },
 
-    find : function ( selector: string, context?: any ): ChocolateChipElementArray {
+    find: function ( selector: string, context?: any ): ChocolateChipElementArray {
       var ret = <ChocolateChipElementArray>[];
       if (!this.length) return ret;
       if (context) {
-        $(context).forEach(function() {
-          [].slice.apply(context.querySelectorAll(selector)).forEach(function(node) {
-            ret.push(node);
-          });
+        $(context).forEach(() => {
+          slice(context.querySelectorAll(selector)).forEach((node) => ret.push(node));
         });
       } else {
-        $(this).forEach(function(ctx) {
+        $(this).forEach((ctx) => {
           if (ctx.children && ctx.children.length) {
-            [].slice.apply(ctx.querySelectorAll(selector)).forEach(function(node) {
-              ret.push(node);
-            });
+            slice(ctx.querySelectorAll(selector)).forEach((node) => ret.push(node));
           }
         });
       }
@@ -97,7 +95,7 @@
       var __is = function ( node, arg ) {
         $this = this;
         if (typeof arg === 'string') {
-          if ([].slice.apply(node.parentNode.querySelectorAll(arg)).indexOf(node) >= 0) {
+          if (slice(node.parentNode.querySelectorAll(arg)).indexOf(node) >= 0) {
             return node;
           }
         } else if (typeof arg === 'function') {
@@ -128,14 +126,14 @@
       }
     },
 
-    isnt : function ( arg: any ): ChocolateChipElementArray {
+    isnt: function ( arg: any ): ChocolateChipElementArray {
     if (!this.length) return <ChocolateChipElementArray>[];
       var items = <ChocolateChipElementArray>[];
       var $this;
       var __isnt = function ( node, arg ) {
         $this = this;
         if (typeof arg === 'string') {
-          if ([].slice.apply(node.parentNode.querySelectorAll(arg)).indexOf(node) === -1) {
+          if (slice(node.parentNode.querySelectorAll(arg)).indexOf(node) === -1) {
             return node;
           }
         } else if (typeof arg === 'function') {
@@ -143,7 +141,7 @@
             return node;
           }
         } else if (arg.length) {
-          if ([].slice.apply(arg).indexOf(node) === -1) {
+          if (slice(arg).indexOf(node) === -1) {
             return node;
           }
         } else if (arg.nodeType === 1) {
@@ -166,7 +164,7 @@
       }
     },
 
-    has : function ( arg: string ): ChocolateChipElementArray {
+    has: function ( arg: string ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var items = <ChocolateChipElementArray>[];
       var __has = function ( node, arg ) {
@@ -175,14 +173,14 @@
             return node;
           }
         } else if (arg.nodeType === 1) {
-          if ([].slice.apply(this.children).indexOf(arg)) {
+          if (slice(this.children).indexOf(arg)) {
             return node;
           }
         } else {
           return false;
         }
       };
-      this.each(function(item) {
+      this.each((item) => {
         if (__has(item, arg)) {
           items.push(item);
         }
@@ -194,16 +192,16 @@
       }
     },
 
-    hasnt : function ( arg: HTMLElement | string ): ChocolateChipElementArray {
+    hasnt: function ( arg: HTMLElement | string ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var items = <ChocolateChipElementArray>[];
-      this.each(function(item) {
+      this.each((item) => {
         if (typeof arg === 'string') {
           if (!item.querySelector(arg)) {
             items.push(item);
           }
         } else if (arg.nodeType === 1) {
-          if (![].slice.apply(item.children).indexOf(arg)) {
+          if (!slice(item.children).indexOf(arg)) {
             items.push(item);
           }
         }
@@ -215,10 +213,10 @@
       }
     },
 
-    prev : function ( ): ChocolateChipElementArray {
+    prev: function ( ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
-      this.each(function(node) {
+      this.each((node) => {
         if (node.previousElementSibling) {
           ret.push(node.previousElementSibling);
         }
@@ -226,10 +224,10 @@
       return ret;
     },
 
-    next : function ( ): ChocolateChipElementArray {
+    next: function ( ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
-      this.each(function(node) {
+      this.each((node) => {
         if (node.nextElementSibling) {
           ret.push(node.nextElementSibling);
         }
@@ -237,10 +235,10 @@
       return ret;
     },
 
-    first : function ( ): ChocolateChipElementArray {
+    first: function ( ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
-      this.each(function(node) {
+      this.each((node) => {
         if (node.firstElementChild) {
           ret.push(node.firstElementChild);
         }
@@ -248,10 +246,10 @@
       return ret;
     },
 
-    last : function ( ): ChocolateChipElementArray {
+    last: function ( ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
-      this.each(function(node) {
+      this.each((node) =>{
         if (node.lastElementChild) {
           ret.push(node.lastElementChild);
         }
@@ -278,13 +276,11 @@
         return node;
       };
 
-      this.each(function(node) {
-        __before(node, content);
-      });
+      this.each((node) => __before(node, content));
       return this;
     },
 
-    after : function ( args: any ): ChocolateChipElementArray {
+    after: function ( args: any ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var __after = function ( node, content ) {
         var parent = node.parentNode;
@@ -307,24 +303,20 @@
         return this;
       };
 
-      this.each(function(node) {
-        __after(node, args);
-      });
+      this.each((node) => __after(node, args));
       return this;
     },
 
-    children : function ( selector?: string ): ChocolateChipElementArray {
+    children: function ( selector?: string ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
       if (!selector) {
-        this.each(function(node) {
-          [].slice.apply(node.children).forEach(function(ctx) {
-            ret.push(ctx);
-          });
+        this.each((node) => {
+          slice(node.children).forEach((ctx) => ret.push(ctx));
         });
       } else {
-        this.forEach(function(node) {
-          [].slice.apply(node.children).forEach(function(ctx) {
+        this.forEach((node) => {
+          slice(node.children).forEach((ctx) => {
           if ($(ctx).is(selector)[0]) {
             ret.push(ctx);
           }
@@ -334,7 +326,7 @@
       return ret;
     },
 
-    siblings : function ( selector?: string | boolean ): ChocolateChipElementArray {
+    siblings: function ( selector?: string | boolean ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var _siblings;
       var ret = <ChocolateChipElementArray>[];
@@ -343,19 +335,17 @@
       } else {
         selector = false;
       }
-      this.each(function(ctx) {
+      this.each((ctx) => {
         _siblings = $(ctx).parent().children();
         _siblings.splice(_siblings.indexOf(ctx),1);
         if (selector) {
-          _siblings.each(function(node) {
+          _siblings.each((node) => {
             if ($(node).is(selector)[0]) {
               ret.push(node);
             }
           });
         } else {
-          _siblings.each(function(node) {
-            ret.push(node);
-          });
+          _siblings.each((node) => ret.push(node));
         }
       });
       return ret.length ? ret['unique']() : this;
@@ -364,14 +354,12 @@
     parent: function ( ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
-      this.each(function(ctx) {
-        ret.push(ctx.parentNode);
-      });
+      this.each((ctx) => ret.push(ctx.parentNode));
       ret = ret['unique']();
       return $['returnResult'](ret)
     },
 
-    ancestor : function ( selector: any ): ChocolateChipElementArray {
+    ancestor: function ( selector: any ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
       if (typeof selector === 'undefined') {
@@ -408,11 +396,11 @@
       return ret;
     },
 
-    closest : function ( selector: any ): ChocolateChipElementArray {
+    closest: function ( selector: any ): ChocolateChipElementArray {
       return this.ancestor(selector);
     },
 
-    insert : function ( content: any, position?: any ): ChocolateChipElementArray {
+    insert: function ( content: any, position?: any ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var __insert = function (node, content, position) {
         if (node instanceof Array) {
@@ -457,58 +445,48 @@
       };
       var cnt = content;
       if (typeof cnt === 'string') {
-        this.each(function(node) {
-          __insert(node, content, position);
-        });
+        this.each((node) => __insert(node, content, position));
       } else if (cnt instanceof Array) {
-        this.each(function(node, idx) {
+        this.each((node, idx) => {
           if (position === 1 || position === 'first') {
             cnt = cnt.reverse();
           }
-          cnt.each(function(n, i) {
-            __insert(node, n, position);
-          });
+          cnt.each((n, i) => __insert(node, n, position));
         });
       } else if (cnt.nodeType === 1) {
-        this.each(function(node) {
-          __insert(node, cnt, position);
-        });
+        this.each((node) => __insert(node, cnt, position));
       }
       return this;
     },
 
-    prepend : function ( content: any ): ChocolateChipElementArray {
+    prepend: function ( content: any ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       this.insert(content,'first');
       return this;
     },
 
-    append : function ( content: ChocolateChipElementArray|HTMLElement|Text|string ): ChocolateChipElementArray {
+    append: function ( content: ChocolateChipElementArray|HTMLElement|Text|string ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       this.insert(content, 'last');
       return this;
     },
 
-    prependTo : function ( selector: any ): ChocolateChipElementArray {
+    prependTo: function ( selector: any ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       this.reverse();
-      this.each(function(item) {
-        $(selector)[0].insertBefore(item, $(selector)[0].firstChild);
-      });
+      this.each((item) => $(selector)[0].insertBefore(item, $(selector)[0].firstChild));
       return this;
     },
 
-    appendTo : function ( selector: any ): ChocolateChipElementArray {
+    appendTo: function ( selector: any ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
-      this.each(function(item) {
-        $(selector).append(item);
-      });
+      this.each((item) => $(selector).append(item));
       return this;
     },
 
     remove: function ( ): ChocolateChipElementArray {
         if (!this.length) return <any>[];
-        this.each(function(ctx) {
+        this.each((ctx) => {
             $(ctx).unbind();
             $(ctx).removeData();
             ctx.parentNode.removeChild(ctx);
@@ -517,7 +495,7 @@
 
     wrap: function ( string: string ) {
         if (!this.length) return <ChocolateChipElementArray>[];
-        this.each(function(ctx) {
+        this.each((ctx) => {
             var tempNode = $.make(string);
             tempNode = tempNode[0];
             var whichClone = $(ctx).clone(true);
@@ -527,10 +505,10 @@
         });
     },
 
-    unwrap : function ( ): ChocolateChipElementArray {
+    unwrap: function ( ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var parentNode = null;
-      this.each(function(node) {
+      this.each((node) => {
         if (node.parentNode === parentNode) {
           return;
         }
@@ -543,10 +521,10 @@
       return this;
     },
 
-    clone : function ( value?: boolean ): ChocolateChipElementArray {
+    clone: function ( value?: boolean ): ChocolateChipElementArray {
       if (!this.length) return <any>[];
       var ret = <ChocolateChipElementArray>[];
-      this.each(function(ctx) {
+      this.each((ctx) => {
         if (value === true || !value) {
           ret.push(ctx.cloneNode(true));
         } else {
@@ -562,7 +540,7 @@
       if (!property) return <ChocolateChipElementArray>[];
       if (!value && property instanceof Object) {
         if (!this.length) return;
-        this.forEach(function(node) {
+        this.forEach((node) => {
           for (var key in property) {
             if (property.hasOwnProperty(key)) {
               node.style[$['camelize'](key)] = property[key];
@@ -583,17 +561,17 @@
       return $['returnResult'](ret)
     },
 
-    width : function ( ): number {
+    width: function ( ): number {
       if (!this.length) return;
       return this.eq(0)[0].clientWidth;
     },
 
-    height : function ( ): number {
+    height: function ( ): number {
       if (!this.length) return;
       return this.eq(0)[0].clientHeight;
     },
 
-    offset : function ( ): Object {
+    offset: function ( ): Object {
       if (!this.length) return;
       var offset = this.eq(0)[0].getBoundingClientRect();
       return {
@@ -604,7 +582,7 @@
        };
     },
 
-    empty : function ( ): ChocolateChipElementArray {
+    empty: function ( ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
       this.each(function(ctx) {
@@ -615,7 +593,7 @@
       return $['returnResult'](ret)
     },
 
-    html : function ( content: string ): ChocolateChipElementArray {
+    html: function ( content: string ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
       var __html = function ( node, content ) {
@@ -635,7 +613,7 @@
       return $['returnResult'](ret)
     },
 
-    text : function ( string?: string ): any {
+    text: function ( string?: string ): any {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = '';
 
@@ -661,7 +639,7 @@
       return this;
     },
 
-    val : function ( value?: string ): ChocolateChipElementArray | string {
+    val: function ( value?: string ): ChocolateChipElementArray | string {
       if (!this.length) return <ChocolateChipElementArray>[];
       if (typeof value === 'string') {
         this[0].value = value;
@@ -675,12 +653,12 @@
       }
     },
 
-    prop : function ( property: string, value?: string | number ) {
+    prop: function ( property: string, value?: string | number ) {
       if (!this.length) return <ChocolateChipElementArray>[];
       return this.attr(property, value);
     },
 
-    addClass : function ( className: string ): ChocolateChipElementArray {
+    addClass: function ( className: string ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       if (typeof className !== "string") return;
       var ret = <ChocolateChipElementArray>[];
@@ -699,7 +677,7 @@
       return $['returnResult'](ret);
     },
 
-    hasClass : function ( className: string ): ChocolateChipElementArray {
+    hasClass: function ( className: string ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
       var tokens = <any>[];
@@ -721,7 +699,7 @@
       return $['returnResult'](ret)
     },
 
-    removeClass : function ( className: string ): ChocolateChipElementArray {
+    removeClass: function ( className: string ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
       var classes;
@@ -743,7 +721,7 @@
       return $['returnResult'](ret);
     },
 
-    toggleClass : function ( className: string ): ChocolateChipElementArray {
+    toggleClass: function ( className: string ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
       this.each(function(node) {
@@ -753,7 +731,7 @@
       return $['returnResult'](ret)
     },
     
-    attr : function ( property: string, value?: string ): string | ChocolateChipElementArray {
+    attr: function ( property: string, value?: string ): string | ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
       var __attr = function ( node, property, value ) {
@@ -778,7 +756,7 @@
       }
     },
 
-    hasAttr : function ( property: string ): ChocolateChipElementArray {
+    hasAttr: function ( property: string ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
       this.each(function(node) {
@@ -789,7 +767,7 @@
       return $['returnResult'](ret)
     },
 
-    removeAttr : function ( attribute: string ): ChocolateChipElementArray {
+    removeAttr: function ( attribute: string ): ChocolateChipElementArray {
       if (!this.length) return <any>[];
       var ret = <ChocolateChipElementArray>[];
       this.each(function(node) {
@@ -812,7 +790,7 @@
       return $['returnResult'](ret)
     },
 
-    enable : function ( ): ChocolateChipElementArray {
+    enable: function ( ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
       this.each(function(node) {
@@ -823,7 +801,7 @@
       return $['returnResult'](ret)
     },
 
-    hide : function ( speed: any, callback?: Function ): ChocolateChipElementArray {
+    hide: function ( speed: any, callback?: Function ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var cbk = callback || $['noop'];
       if (!this.length) return <ChocolateChipElementArray>[];
@@ -883,7 +861,7 @@
       return $['returnResult'](ret)
     },
 
-    show : function ( speed: any, callback?: Function ) {
+    show: function ( speed: any, callback?: Function ) {
       if (!this.length) return <ChocolateChipElementArray>[];
       var cbk = callback || $['noop'];
       var createCSSAnim = function(opacity, height, padding) {
@@ -940,7 +918,7 @@
       });
     },
 
-    animate : function ( options: Object, duration?: string, easing?: string ): ChocolateChipElementArray {
+    animate: function ( options: Object, duration?: string, easing?: string ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var onEnd = null;
       duration = duration || '.5s';

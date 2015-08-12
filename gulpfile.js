@@ -148,8 +148,9 @@ gulp.task('tests', function() {
     './src/fetch/*'
     ])
     .pipe(replace('REPLACE_CHOCOLATECHIPJS_VERSION', pkg.version))
-    .pipe(gulp.dest('fetch'))
-
+    .pipe(gulp.dest('fetch'));
+  gulp.src('dist/*.js')
+    .pipe(gulp.dest('fetch/js'));
 });
 
 /* 

@@ -3,29 +3,29 @@ function chocolatechipjs <ChocolateChipStatic>( selector?:Document|Function|any,
   var idRE = /^#([\w-]*)$/;
   var classRE = /^\.([\w-]+)$/;
   var tagRE = /^[\w-]+$/;
-
-  var getId = function(selector: string): Array<any> {
+  var slice = (elements: NodeList) => [].slice.apply(elements);
+  var getId = (selector: string): Array<any> => {
     var el =  document.getElementById(selector.split('#')[1]);
     return el ? [el] : [];
   };
 
-  var getTag = function(selector: string, context?: HTMLElement): Array<any> {
+  var getTag = (selector: string, context?: HTMLElement): Array<any> => {
     if (context) {
-      return [].slice.apply(context.getElementsByTagName(selector));
+      return slice(context.getElementsByTagName(selector));
     } else {
-      return [].slice.apply(document.getElementsByTagName(selector));
+      return slice(document.getElementsByTagName(selector));
     }
   };
 
-  var getClass = function(selector: string, context?: HTMLElement): Array<any> {
+  var getClass = (selector: string, context?: HTMLElement): Array<any> => {
     if (context) {
-      return [].slice.apply(context.getElementsByClassName(selector.split('.')[1]));
+      return slice(context.getElementsByClassName(selector.split('.')[1]));
     } else {
-      return [].slice.apply(document.getElementsByClassName(selector.split('.')[1]));
+      return slice(document.getElementsByClassName(selector.split('.')[1]));
     }
   };
 
-  var getNode = function(selector:any, context?: HTMLElement): Array<any> {
+  var getNode = (selector:any, context?: HTMLElement): Array<any> => {
     if (typeof selector === 'string') selector = selector.trim();
     if (typeof selector === 'string' && idRE.test(selector)) {
       return getId(selector);
@@ -40,13 +40,13 @@ function chocolatechipjs <ChocolateChipStatic>( selector?:Document|Function|any,
       } else if (classRE.test(selector)) {
         return getClass(selector);
       } else {
-        return [].slice.apply(document.querySelectorAll(selector));
+        return slice(document.querySelectorAll(selector));
       }
     } else {
       if (context) {
-        return [].slice.apply(context.querySelectorAll(selector));
+        return slice(context.querySelectorAll(selector));
       } else {
-        return [].slice.apply(document.querySelectorAll(selector));
+        return slice(document.querySelectorAll(selector));
       }
     }
   };
@@ -59,7 +59,7 @@ function chocolatechipjs <ChocolateChipStatic>( selector?:Document|Function|any,
   }
   if (!!context) {
     if (typeof context === 'string') {
-      return [].slice.apply(document.querySelectorAll(context + ' ' + selector));
+      return slice(document.querySelectorAll(context + ' ' + selector));
     } else if (context.nodeType === 1) {
       return getNode(selector, context);
     }
@@ -87,7 +87,7 @@ function chocolatechipjs <ChocolateChipStatic>( selector?:Document|Function|any,
   } else if (selector instanceof Array) {
     return selector;
   } else if (/NodeListConstructor/i.test(selector.constructor.toString())) {
-    return [].slice.apply(selector);
+    return slice(selector);
   } else if (selector === window) {
     return <ChocolateChipElementArray>[];
   }
@@ -96,13 +96,13 @@ function chocolatechipjs <ChocolateChipStatic>( selector?:Document|Function|any,
 }
 
 module chocolatechipjs {
-  export var extend = function ( obj: Object, prop?: Object, enumerable?: boolean ): ChocolateChipStatic {
+  export var extend = ( obj: Object, prop?: Object, enumerable?: boolean ): ChocolateChipStatic => {
     enumerable = enumerable || false;
     if (!prop) {
       prop = obj;
       obj = chocolatechipjs;
     }
-    Object.keys(prop).forEach(function(p) {
+    Object.keys(prop).forEach((p) => {
       if (prop.hasOwnProperty(p)) {
         Object.defineProperty(obj, p, {
           value: prop[p],
@@ -112,10 +112,10 @@ module chocolatechipjs {
         });
       }
     });
-    return this;
+    return <any>chocolatechipjs;
   };
   export var fn = {
-    extend : function ( object ): ChocolateChipStatic {
+    extend : ( object ): ChocolateChipStatic => {
       return chocolatechipjs.extend(Array.prototype, object);
     }
   }

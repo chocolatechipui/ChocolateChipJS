@@ -1307,7 +1307,8 @@ interface fetch {
       "no-cache": string;
       "force-cache": string;
       "only-if-cached": string;
-    }
+    };
+    timeout?: number;
   }): Promise<any>;
 }
 
