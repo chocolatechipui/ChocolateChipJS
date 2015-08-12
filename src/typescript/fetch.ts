@@ -8,7 +8,7 @@ enum MethodEnum {
   PUT,
   DELETE,
   TRACE,
-  CONNECT,
+  CONNECT
 }
 
 enum ForbiddenMethodEnum {
