@@ -1,6 +1,6 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
-(function($){
+(($) => {
   $.extend({
     camelize: function ( string: string ): string {
       if (typeof string !== 'string') return;
@@ -21,9 +21,7 @@
       if (all) {
         var str = string.split(' ');
         var newstr = [];
-        str.forEach(function(item) {
-          newstr.push($this.capitalize(item));
-        });
+        str.forEach((item) => newstr.push($this.capitalize(item)));
         return newstr.join(' ');
       } else {
         return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();

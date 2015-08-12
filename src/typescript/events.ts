@@ -1,11 +1,11 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
-(function($){
+(($) => {
   $.fn.extend({
       bind : function ( event: string, callback: Function, capturePhase?: boolean ): ChocolateChipElementArray {
         if (!this.length) return <ChocolateChipElementArray>[];
         capturePhase = capturePhase || false;
-        this.each(function(ctx) {
+        this.each((ctx) => {
           $['chch_cache'].events.set(ctx, event, callback, capturePhase);
         });
         return this;
@@ -14,7 +14,7 @@
       unbind : function ( event: string, callback: Function, capturePhase?: boolean ): ChocolateChipElementArray {
         if (!this.length) return <ChocolateChipElementArray>[];
         var id;
-        this.each(function(ctx) {
+        this.each((ctx) => {
           if (!ctx.id || !$['chch_cache'].events.hasKey(ctx.id)) {
             return this;
           }
@@ -28,13 +28,13 @@
       delegate: function ( selector, event, callback, capturePhase ): any {
         if (!this.length) return [];
         capturePhase = capturePhase || false;
-        this.each(function(ctx) {
-          ctx.addEventListener(event, function(e) {
+        this.each((ctx) => {
+          ctx.addEventListener(event, (e) => {
             var target = e.target;
             if (e.target.nodeType === 3) {
               target = e.target.parentNode;
             }
-            $(selector, ctx).each(function(element) {
+            $(selector, ctx).each((element) => {
               if (element === target) {
                 callback.call(element, e);
               } else {
@@ -52,9 +52,7 @@
 
       undelegate : function ( selector: any, event: string, callback: Function, capturePhase?: boolean ): any {
         if (!this.length) return <ChocolateChipElementArray>[];
-        this.each(function(ctx) {
-          $(ctx).unbind(event, callback, capturePhase);
-        });
+        this.each((ctx) => $(ctx).unbind(event, callback, capturePhase));
       },
 
       on : function ( event: any, selector: any, callback: any, capturePhase?: boolean ): ChocolateChipElementArray {
@@ -62,7 +60,7 @@
         // If an object literal of events:functions are passed,
         // map them to event listeners on the element:
         if (! selector && /Object/img.test(event.constructor.toString())) {
-          this.each(function(ctx) {
+          this.each((ctx) => {
             for (var key  in event) {
               if (event.hasOwnProperty(key)) {
                 $(ctx).on(key, event[key]);
@@ -78,7 +76,7 @@
           if (/\s/.test(event)) {
             events = event.split(' ');
             if (events.length) {
-              this.each(function(ctx) {
+              this.each((ctx) => {
                 events.each(function(evt) {
                   if (typeof selector === 'function') {
                     $(ctx).bind(evt, selector, callback);
@@ -92,7 +90,7 @@
             }
           }
         }
-        this.each(function(ctx) {
+        this.each((ctx) => {
           if (typeof selector === 'function') {
             $(ctx).bind(event, selector, callback);
             ret.push(ctx);
@@ -107,7 +105,7 @@
       off : function ( event, selector, callback, capturePhase ): ChocolateChipElementArray {
         if (!this.length) return <ChocolateChipElementArray>[];
         var ret = [];
-        this.each(function(ctx) {
+        this.each((ctx) => {
           if (typeof selector === 'function' || !selector) {
             $(ctx).unbind(event, selector, callback);
             ret.push(ctx);
@@ -121,7 +119,7 @@
 
       trigger : function ( event ): ChocolateChipElementArray {
         if (!this.length) return <ChocolateChipElementArray>[];
-        this.each(function(ctx) {
+        this.each((ctx) => {
           if( document.createEvent ) {
             var evtObj = document.createEvent('Events');
             evtObj.initEvent(event, true, false);

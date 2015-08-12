@@ -1,6 +1,6 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
-(function($){
+(($) => {
   $.extend({
     chch_cache : {
       data: {},
@@ -17,7 +17,7 @@
            key = element.id;
          } else {
            ++chocolatechipjs['uuid'];
-           key = chocolatechipjs['makeUuid']();
+           key = chocolatechipjs['uuidNum']();
            element.setAttribute("id", key);
          }
          if (this.keys.indexOf(key) >= 0) {
@@ -56,7 +56,7 @@
            return;
          }
          if (typeof event === 'undefined') {
-           cache[idx].each(function(item) {
+           cache[idx].each((item) => {
              document.getElementById(element).removeEventListener(item[0], item[1], item[2]);
              $['chch_cache'].events.keys.splice(idx, 1);
              cache[idx].splice(idx, 1);
@@ -64,7 +64,7 @@
            cache.splice(idx, 1);
          }
          if (event && callback) {
-           cache[idx].each(function(item) {
+           cache[idx].each((item) => {
              if (item[0] === event) {
                document.getElementById(element).removeEventListener(item[0], item[1], item[2]);
                $['chch_cache'].events.values.splice(idx, 1);
@@ -73,7 +73,7 @@
            });
          }
          if (event && typeof callback === 'undefined') {
-           $this.values[idx].each(function(item) {
+           $this.values[idx].each((item) => {
              if (item[0] === event) {
                document.getElementById(element).removeEventListener(item[0], item[1], item[2]);
                $['chch_cache'].events.values.splice(idx, 1);

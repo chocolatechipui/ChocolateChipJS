@@ -1,9 +1,9 @@
 /// <reference path='../typings/chocolatechipjs/chocolatechipjs.d.ts' />
 /// <reference path='core.ts' />
-(function($){
+(($) => {
   "use strict";
   $.extend($, {  
-    serialize : function ( element ) {
+    serialize: ( element ) => {
       var form;
       var elements;
       if (typeof element === 'string') {
@@ -21,7 +21,7 @@
       var words;
       var temp;
       var arr = [];
-      elements.forEach(function(input) {
+      elements.forEach((input) => {
         if (input.nodeName === 'FIELDSET') return;
         if (!names) {
           names += input.name + '=';
@@ -30,7 +30,7 @@
         }
         temp = input.value || '';
         words = temp.split(' ');
-        words.forEach(function(word) {
+        words.forEach((word) => {
           arr.push(encodeURIComponent(word));
         });
         escaped = words.join('+');
@@ -43,28 +43,13 @@
     },
   
     // Convert form values into JSON object:
-    form2JSON : function ( rootNode, delimiter ): JSON {
+    form2JSON: ( rootNode, delimiter ): JSON => {
       rootNode = typeof rootNode === 'string' ? $(rootNode)[0] : rootNode;
       delimiter = delimiter || '.';
-      var formValues = getFormValues(rootNode);
       var result = {};
       var arrays = {};
-      
-      function getFormValues(rootNode): HTMLElement[] {
-        var result = [];
-        var currentNode = rootNode.firstChild;
-        while (currentNode) {
-          if (currentNode.nodeName.match(/INPUT|SELECT|TEXTAREA/i)) {
-            result.push({ name: currentNode.name, value: getFieldValue(currentNode)});
-          } else {
-            var subresult = getFormValues(currentNode);
-            result = result.concat(subresult);
-          }
-          currentNode = currentNode.nextSibling;
-        }
-        return result;
-      }
-      function getFieldValue(fieldNode) {
+
+      var getFieldValue = (fieldNode) => {
         if (fieldNode.nodeName === 'INPUT') {
           if (fieldNode.type.toLowerCase() === 'radio' || fieldNode.type.toLowerCase() === 'checkbox') {
             if (fieldNode.checked) {
@@ -85,23 +70,38 @@
           }
         }
         return '';
-      }
-      function getSelectedOptionValue(selectNode) {
+      };
+      var getFormValues = (rootNode): HTMLElement[]=> {
+        var result = [];
+        var currentNode = rootNode.firstChild;
+        while (currentNode) {
+          if (currentNode.nodeName.match(/INPUT|SELECT|TEXTAREA/i)) {
+            result.push({ name: currentNode.name, value: getFieldValue(currentNode) });
+          } else {
+            var subresult = getFormValues(currentNode);
+            result = result.concat(subresult);
+          }
+          currentNode = currentNode.nextSibling;
+        }
+        return result;
+      };
+      var getSelectedOptionValue = (selectNode) => {
         var multiple = selectNode.multiple;
         if (!multiple) {
           return selectNode.value;
         }
         if (selectNode.selectedIndex > -1) {
           var result = [];
-          $('option', selectNode).each(function(item) {
+          $('option', selectNode).each((item) => {
             if (item.selected) {
               result.push(item.value);
             }
           });
           return result;
         }
-      }   
-      formValues.forEach(function(item: any) {
+      };
+      var formValues = getFormValues(rootNode);
+      formValues.forEach((item: any) => {
         var value = item.value;
         if (value !== '') {
           var name = item.name;

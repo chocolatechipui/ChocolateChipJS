@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Examples</title>
-  <script src='../dist/chocolatechipjs-4.0.0.js'></script>
+  <script src='../dist/chocolatechipjs-4.0.1.js'></script>
   <style>
     .cloak > * {
       display: none;
@@ -49,12 +49,6 @@
 
     // Parse declarative repeater:
     $.template.repeater();
-
-    // Update repeater output:
-    var each = $('#each');
-    $.each(array, function(ctx, idx) {
-      each.append('<li><span>' + idx + ': </span>' + ctx + '</li>')
-    });
   });
   </script>
 </head>

@@ -1,7 +1,7 @@
 module('Core Tests');
 // 1
 test('Returns version of ChocolateChip', function() {
-   equal($.version, '4.0.0', 'Should be 4.0.0')
+   equal($.version, '4.0.1', 'Should be 4.0.1')
 });
 // 2
 test('Returns name of library (ChocolateChip)', function() {
@@ -203,22 +203,11 @@ test('$.UuidNum should return 36 character string.', function() {
    equal(uid.split('-')[4].length, 12, 'Fifth section should have 12 characters.');
 });
 // 24
-test('$.makeUuid() should return uid prefixed by "chch_', function() {
-   var uid = $.makeUuid();
-   var prefix = uid.split('_')[0];
-   equal(/chch_/.test(uid.toString()), true, 'Should contain the string "chch_');
-   equal(prefix + '_', 'chch_', 'Prefix should be "chch_"');
-});
-// 25
-test('$.chch_cache, an object to hold ChUI cache.', function(){
-   equal($.isObject($.chch_cache), true, 'Should be an object.');
-});
-// 26
 test('$.fn is object used for extending ChocolateChip.', function(){
    equal($.isObject($.fn), true, 'Should be an object');
    equal(Object.keys($.fn)[0], 'extend', 'Should be the extend method.');
 });
-// 27
+// 25
 test('$.each should loop arrays', function() {
    var data = [1,2,3,4,5,6];
    var result = '';
