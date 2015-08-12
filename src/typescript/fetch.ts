@@ -314,11 +314,17 @@ function isForbiddenMethod ( method: ByteString ): boolean {
         if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
           return xhr.getResponseHeader('X-Request-URL')
         }
-
         return;
       }
 
+      var reqTimeout;
+      if (init && init.timeout) {
+        reqTimeout = setTimeout(function() {
+            reject(new TypeError('Request timed out at: ' + input))
+        }, init.timeout);
+      }
       xhr.onload = function(): void {
+        clearTimeout(reqTimeout);
         var status = (xhr.status === 1223) ? 204 : xhr.status
         if (status < 100 || status > 599) {
           reject(new TypeError('Network request failed'))
@@ -335,6 +341,7 @@ function isForbiddenMethod ( method: ByteString ): boolean {
       }
 
       xhr.onerror = function(): void {
+        clearTimeout(reqTimeout);
         reject(new TypeError('Network request failed'))
       }
 
