@@ -1385,6 +1385,7 @@ interface Response {
   headers: Headers;
   bodyUsed: boolean;
 }
+
 interface ChocolateChipStatic {
   jsonp(url: string, options?: {
     timeout?: number;
