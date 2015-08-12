@@ -316,7 +316,7 @@ function isForbiddenMethod ( method: ByteString ): boolean {
         }
         return;
       }
-
+      // Enable timeout:
       var reqTimeout;
       if (init && init.timeout) {
         reqTimeout = setTimeout(function() {
