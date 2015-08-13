@@ -25,7 +25,6 @@
       })
       .then($.json) 
       .then(function(data) {
-          console.dir(data.base);
           $("#message_ajax").append('<p>' + data.result + '</p>');
           $("#message_ajax").append('<p>The file name is: ' + data.fileName + '</p>');
       })

@@ -21,45 +21,45 @@ function isForbiddenMethod ( method: ByteString ): boolean {
   if (ForbiddenMethodEnum[method] !== undefined) {
     return true;
   }
-  return false
+  return false;
 }
 
 (function(self) {
   'use strict';
 
   if (self.fetch) {
-    return
+    return;
   }
 
   function normalizeName ( name: string ): string {
     if (typeof name !== 'string') {
-      name = String(name)
+      name = String(name);
     }
     if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
       throw new TypeError('Invalid character in header field name')
     }
-    return name.toLowerCase()
+    return name.toLowerCase();
   }
 
   function normalizeValue ( value: string ): string {
     if (typeof value !== 'string') {
-      value = String(value)
+      value = String(value);
     }
-    return value
+    return value;
   }
 
   function Headers ( headers?: any ): void {
-    this.map = {}
+    this.map = {};
 
     if (headers instanceof Headers) {
       headers.forEach(function(value, name) {
-        this.append(name, value)
-      }, this)
+        this.append(name, value);
+      }, this);
 
     } else if (headers) {
       Object.getOwnPropertyNames(headers).forEach(function(name) {
-        this.append(name, headers[name])
-      }, this)
+        this.append(name, headers[name]);
+      }, this);
     }
   }
 
@@ -68,151 +68,151 @@ function isForbiddenMethod ( method: ByteString ): boolean {
     value = normalizeValue(value)
     var list = this.map[name]
     if (!list) {
-      list = []
-      this.map[name] = list
+      list = [];
+      this.map[name] = list;
     }
-    list.push(value)
+    list.push(value);
   }
 
   Headers.prototype['delete'] = function ( name: string ): void {
-    delete this.map[normalizeName(name)]
+    delete this.map[normalizeName(name)];
   }
 
   Headers.prototype.get = function ( name: string ): ByteString {
-    var values = this.map[normalizeName(name)]
-    return values ? values[0] : null
+    var values = this.map[normalizeName(name)];
+    return values ? values[0] : null;
   }
 
   Headers.prototype.getAll = function ( name: string ): Array<ByteString>  {
-    return this.map[normalizeName(name)] || []
+    return this.map[normalizeName(name)] || [];
   }
 
   Headers.prototype.has = function ( name: string ): boolean {
-    return this.map.hasOwnProperty(normalizeName(name))
+    return this.map.hasOwnProperty(normalizeName(name));
   }
 
   Headers.prototype.set = function ( name: string, value: string ): void {
-    this.map[normalizeName(name)] = [normalizeValue(value)]
+    this.map[normalizeName(name)] = [normalizeValue(value)];
   }
 
   Headers.prototype.forEach = function(callback: Function, thisArg: any): void {
     Object.getOwnPropertyNames(this.map).forEach(function(name) {
       this.map[name].forEach(function(value) {
-        callback.call(thisArg, value, name, this)
+        callback.call(thisArg, value, name, this);
       }, this)
     }, this)
   }
 
   function consumed ( body ): any {
     if (body.bodyUsed) {
-      return Promise.reject(new TypeError('Already read'))
+      return Promise.reject(new TypeError('Already read'));
     }
-    body.bodyUsed = true
+    body.bodyUsed = true;
   }
 
   function fileReaderReady ( reader ): Promise<any> {
     return new Promise(function(resolve, reject) {
       reader.onload = function() {
-        resolve(reader.result)
+        resolve(reader.result);
       }
       reader.onerror = function() {
-        reject(reader.error)
+        reject(reader.error);
       }
-    })
+    });
   }
 
   function readBlobAsArrayBuffer ( blob ): Promise<any> {
-    var reader = new FileReader()
-    reader.readAsArrayBuffer(blob)
-    return fileReaderReady(reader)
+    var reader = new FileReader();
+    reader.readAsArrayBuffer(blob);
+    return fileReaderReady(reader);
   }
 
   function readBlobAsText ( blob ): Promise<any> {
-    var reader = new FileReader()
-    reader.readAsText(blob)
-    return fileReaderReady(reader)
+    var reader = new FileReader();
+    reader.readAsText(blob);
+    return fileReaderReady(reader);
   }
 
   var support = {
     blob: 'FileReader' in self && 'Blob' in self && (function() {
       try {
         new Blob();
-        return true
+        return true;
       } catch(e) {
-        return false
+        return false;
       }
     })(),
     formData: 'FormData' in self
   }
 
   function Body(): void {
-    this.bodyUsed = false
+    this.bodyUsed = false;
 
 
     this._initBody = function(body) {
-      this._bodyInit = body
+      this._bodyInit = body;
       if (typeof body === 'string') {
-        this._bodyText = body
+        this._bodyText = body;
       } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
-        this._bodyBlob = body
+        this._bodyBlob = body;
       } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
-        this._bodyFormData = body
+        this._bodyFormData = body;
       } else if (!body) {
-        this._bodyText = ''
+        this._bodyText = '';
       } else {
-        throw new Error('unsupported BodyInit type')
+        throw new Error('unsupported BodyInit type');
       }
     }
 
     if (support.blob) {
       this.blob = function() {
-        var rejected = consumed(this)
+        var rejected = consumed(this);
         if (rejected) {
-          return rejected
+          return rejected;
         }
 
         if (this._bodyBlob) {
-          return Promise.resolve(this._bodyBlob)
+          return Promise.resolve(this._bodyBlob);
         } else if (this._bodyFormData) {
-          throw new Error('could not read FormData body as blob')
+          throw new Error('could not read FormData body as blob');
         } else {
-          return Promise.resolve(new Blob([this._bodyText]))
+          return Promise.resolve(new Blob([this._bodyText]));
         }
       }
 
       this.arrayBuffer = function() {
-        return this.blob().then(readBlobAsArrayBuffer)
+        return this.blob().then(readBlobAsArrayBuffer);
       }
 
       this.text = function() {
-        var rejected = consumed(this)
+        var rejected = consumed(this);
         if (rejected) {
-          return rejected
+          return rejected;
         }
 
         if (this._bodyBlob) {
-          return readBlobAsText(this._bodyBlob)
+          return readBlobAsText(this._bodyBlob);
         } else if (this._bodyFormData) {
-          throw new Error('could not read FormData body as text')
+          throw new Error('could not read FormData body as text');
         } else {
-          return Promise.resolve(this._bodyText)
+          return Promise.resolve(this._bodyText);
         }
       }
     } else {
       this.text = function() {
-        var rejected = consumed(this)
-        return rejected ? rejected : Promise.resolve(this._bodyText)
+        var rejected = consumed(this);
+        return rejected ? rejected : Promise.resolve(this._bodyText);
       }
     }
 
     if (support.formData) {
       this.formData = function() {
-        return this.text().then(decode)
+        return this.text().then(decode);
       }
     }
 
     this.json = function() {
-      return this.text().then(JSON.parse)
+      return this.text().then(JSON.parse);
     }
 
     return this
@@ -223,12 +223,30 @@ function isForbiddenMethod ( method: ByteString ): boolean {
 
   function normalizeMethod ( method ): string {
     var uppercased = method.toUpperCase();
-    return (methods.indexOf(uppercased) > -1) ? uppercased : method
+    return (methods.indexOf(uppercased) > -1) ? uppercased : method;
   }
-
-  function Request ( url, options ): void {
+  
+  function Request ( input, options ): void {
     options = options || {};
-    this.url = url;
+    var body = options.body;
+    if (Request.prototype.isPrototypeOf(input)) {
+      if (input.bodyUsed) {
+        throw new TypeError('Already read');
+      }
+      this.url = input.url;
+      this.credentials = input.credentials;
+      if (!options.headers) {
+        this.headers = new Headers(input.headers);
+      }
+      this.method = input.method;
+      this.mode = input.mode;
+      if (!body) {
+        body = input._bodyInit;
+        input.bodyUsed = true;
+      }
+    } else {
+      this.url = input;
+    }
 
     this.credentials = options.credentials || 'omit';
     this.headers = new Headers(options.headers);
@@ -236,7 +254,7 @@ function isForbiddenMethod ( method: ByteString ): boolean {
     this.mode = options.mode || null;
     this.referrer = null;
 
-    if ((this.method === 'GET' || this.method === 'HEAD') && options.body) {
+    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
       throw new TypeError('Body not allowed for GET or HEAD requests');
     }
     if(isForbiddenMethod(this.method)) {
@@ -259,7 +277,7 @@ function isForbiddenMethod ( method: ByteString ): boolean {
   }
 
   function headers ( xhr ): Headers {
-    var head = new Headers()
+    var head = new Headers();
     var pairs = xhr.getAllResponseHeaders().trim().split('\n');
     pairs.forEach(function(header) {
       var split = header.trim().split(':');
@@ -274,20 +292,20 @@ function isForbiddenMethod ( method: ByteString ): boolean {
 
   function Response ( bodyInit, options ) {
     if (!options) {
-      options = {}
+      options = {};
     }
 
-    this._initBody(bodyInit)
-    this.type = 'default'
-    this.url = null
-    this.status = options.status
-    this.ok = this.status >= 200 && this.status < 300
-    this.statusText = options.statusText
-    this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers)
-    this.url = options.url || ''
+    this._initBody(bodyInit);
+    this.type = 'default';
+    this.url = null;
+    this.status = options.status;
+    this.ok = this.status >= 200 && this.status < 300;
+    this.statusText = options.statusText;
+    this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers);
+    this.url = options.url || '';
   }
 
-  Body.call(Response.prototype)
+  Body.call(Response.prototype);
 
   self.Headers = Headers;
   self.Request = Request;
@@ -295,24 +313,24 @@ function isForbiddenMethod ( method: ByteString ): boolean {
 
   self.fetch = function ( input, init ): Promise<any> {
     // TODO: Request constructor should accept input, init
-    var request
+    var request;
     if (Request.prototype.isPrototypeOf(input) && !init) {
-      request = input
+      request = input;
     } else {
-      request = new Request(input, init)
+      request = new Request(input, init);
     }
 
     return new Promise(function(resolve, reject) {
-      var xhr = new XMLHttpRequest()
+      var xhr = new XMLHttpRequest();
 
       function responseURL() {
         if ('responseURL' in xhr) {
-          return xhr.responseURL
+          return xhr.responseURL;
         }
 
         // Avoid security warnings on getResponseHeader when not allowed by CORS
         if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
-          return xhr.getResponseHeader('X-Request-URL')
+          return xhr.getResponseHeader('X-Request-URL');
         }
         return;
       }
@@ -320,49 +338,49 @@ function isForbiddenMethod ( method: ByteString ): boolean {
       var reqTimeout;
       if (init && init.timeout) {
         reqTimeout = setTimeout(function() {
-            reject(new TypeError('Request timed out at: ' + input))
+            reject(new TypeError('Request timed out at: ' + input));
         }, init.timeout);
       }
       xhr.onload = function(): void {
         clearTimeout(reqTimeout);
-        var status = (xhr.status === 1223) ? 204 : xhr.status
+        var status = (xhr.status === 1223) ? 204 : xhr.status;
         if (status < 100 || status > 599) {
-          reject(new TypeError('Network request failed'))
-          return
+          reject(new TypeError('Network request failed'));
+          return;
         }
         var options = {
           status: status,
           statusText: xhr.statusText,
           headers: headers(xhr),
           url: responseURL()
-        }
+        };
         var body = 'response' in xhr ? xhr.response : xhr.responseText;
-        resolve(new Response(body, options))
+        resolve(new Response(body, options));
       }
 
       xhr.onerror = function(): void {
         clearTimeout(reqTimeout);
-        reject(new TypeError('Network request failed'))
+        reject(new TypeError('Network request failed'));
       }
 
-      xhr.open(request.method, request.url, true)
+      xhr.open(request.method, request.url, true);
 
       if (request.credentials === 'include') {
         xhr.withCredentials = true
       }
 
       if ('responseType' in xhr && support.blob) {
-        xhr.responseType = 'blob'
+        xhr.responseType = 'blob';
       }
 
       request.headers.forEach(function(value, name) {
-        xhr.setRequestHeader(name, value)
+        xhr.setRequestHeader(name, value);
       })
 
-      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
+      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit);
     })
   }
-  self.fetch.polyfill = true
+  self.fetch.polyfill = true;
 
   /**
    *
