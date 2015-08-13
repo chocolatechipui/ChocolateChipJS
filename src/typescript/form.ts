@@ -15,6 +15,7 @@
       } else {
         return;
       }
+      if (form.nodeName !== "FORM") return;
       elements = [].slice.apply(form.elements);
       var names = '';
       var escaped = '';

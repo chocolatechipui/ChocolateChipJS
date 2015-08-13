@@ -4,6 +4,8 @@
   },
   "files": [
     "typings/chocolatechipjs/chocolatechipjs.d.ts",
-    "examples/*"
+    "examples/*",
+    "fetch/**",
+    "fetch/*/**"
   ]
 }

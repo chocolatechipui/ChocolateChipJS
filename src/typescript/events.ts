@@ -6,7 +6,7 @@
         if (!this.length) return <ChocolateChipElementArray>[];
         capturePhase = capturePhase || false;
         this.each((ctx) => {
-          $['chch_cache'].events.set(ctx, event, callback, capturePhase);
+          $.chch_cache.events.set(ctx, event, callback, capturePhase);
         });
         return this;
       },
@@ -15,12 +15,12 @@
         if (!this.length) return <ChocolateChipElementArray>[];
         var id;
         this.each((ctx) => {
-          if (!ctx.id || !$['chch_cache'].events.hasKey(ctx.id)) {
+          if (!ctx.id || !$.chch_cache.events.hasKey(ctx.id)) {
             return this;
           }
           capturePhase = capturePhase || false;
           id = ctx.getAttribute('id');
-          $['chch_cache'].events._delete(id, event, callback, capturePhase);
+          $.chch_cache.events._delete(id, event, callback, capturePhase);
         });
         return this;
       },

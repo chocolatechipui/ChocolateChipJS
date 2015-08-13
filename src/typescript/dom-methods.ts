@@ -249,7 +249,7 @@
     last: function ( ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
-      this.each((node) =>{
+      this.each((node) => {
         if (node.lastElementChild) {
           ret.push(node.lastElementChild);
         }
@@ -261,7 +261,7 @@
       if (!this.length) return <ChocolateChipElementArray>[];
       var __before = function ( node, content ) {
         if (typeof content === 'string') {
-          content = $['make'](content);
+          content = $.make(content);
         }
         if (content && content.constructor === Array) {
           var len = content.length;
@@ -285,7 +285,7 @@
       var __after = function ( node, content ) {
         var parent = node.parentNode;
         if (typeof content === 'string') {
-          content = $['make'](content);
+          content = $.make(content);
         }
         if (content && content.constructor === Array) {
           var i = 0, len = content.length;
@@ -348,15 +348,15 @@
           _siblings.each((node) => ret.push(node));
         }
       });
-      return ret.length ? ret['unique']() : this;
+      return ret.length ? ret.unique() : this;
     },
 
     parent: function ( ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
       this.each((ctx) => ret.push(ctx.parentNode));
-      ret = ret['unique']();
-      return $['returnResult'](ret)
+      ret = ret.unique();
+      return $.returnResult(ret)
     },
 
     ancestor: function ( selector: any ): ChocolateChipElementArray {
@@ -531,7 +531,7 @@
           ret.push(ctx.cloneNode(false));
         }
       });
-      return $['returnResult'](ret)
+      return $.returnResult(ret)
     },
 
     css: function ( property: any, value?: string ): string | ChocolateChipElementArray {
@@ -543,7 +543,7 @@
         this.forEach((node) => {
           for (var key in property) {
             if (property.hasOwnProperty(key)) {
-              node.style[$['camelize'](key)] = property[key];
+              node.style[$.camelize(key)] = property[key];
             }
           }
           ret.push(node);
@@ -554,11 +554,11 @@
       } else if (!!value) {
         if (!this.length) return <ChocolateChipElementArray>[];
         this.forEach(function(node) {
-          node.style[$['camelize'](property)] = value;
+          node.style[$.camelize(property)] = value;
           ret.push(node);
         });
       }
-      return $['returnResult'](ret)
+      return $.returnResult(ret)
     },
 
     width: function ( ): number {
@@ -590,7 +590,7 @@
         ctx.textContent = '';
         ret.push(ctx);
       });
-      return $['returnResult'](ret)
+      return $.returnResult(ret)
     },
 
     html: function ( content: string ): ChocolateChipElementArray {
@@ -610,7 +610,7 @@
       this.each(function(node) {
         __html(node, content);
       });
-      return $['returnResult'](ret)
+      return $.returnResult(ret)
     },
 
     text: function ( string?: string ): any {
@@ -674,7 +674,7 @@
         }
         ret.push(node);
       });
-      return $['returnResult'](ret);
+      return $.returnResult(ret);
     },
 
     hasClass: function ( className: string ): ChocolateChipElementArray {
@@ -691,12 +691,12 @@
               ret.push(node);
             }
           });
-          ret = ret['unique']();
+          ret = ret.unique();
         } else if (node && node.classList && node.classList.contains(className)) {
           ret.push(node);
         }
       });
-      return $['returnResult'](ret)
+      return $.returnResult(ret)
     },
 
     removeClass: function ( className: string ): ChocolateChipElementArray {
@@ -718,7 +718,7 @@
         }
         ret.push(node);
       });
-      return $['returnResult'](ret);
+      return $.returnResult(ret);
     },
 
     toggleClass: function ( className: string ): ChocolateChipElementArray {
@@ -728,7 +728,7 @@
         node.classList.toggle(className);
         ret.push(node);
       });
-      return $['returnResult'](ret)
+      return $.returnResult(ret)
     },
     
     attr: function ( property: string, value?: string ): string | ChocolateChipElementArray {
@@ -764,7 +764,7 @@
           ret.push(node);
         }
       });
-      return $['returnResult'](ret)
+      return $.returnResult(ret)
     },
 
     removeAttr: function ( attribute: string ): ChocolateChipElementArray {
@@ -776,7 +776,7 @@
           ret.push(node);
         }
       });
-      return $['returnResult'](ret)
+      return $.returnResult(ret)
     },
 
     disable: function ( ): ChocolateChipElementArray {
@@ -787,7 +787,7 @@
         node.setAttribute('disabled', true);
         node.style.cursor = 'default';
       });
-      return $['returnResult'](ret)
+      return $.returnResult(ret)
     },
 
     enable: function ( ): ChocolateChipElementArray {
@@ -798,12 +798,12 @@
         node.removeAttribute('disabled');
         node.style.cursor = 'auto';
       });
-      return $['returnResult'](ret)
+      return $.returnResult(ret)
     },
 
     hide: function ( speed: any, callback?: Function ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
-      var cbk = callback || $['noop'];
+      var cbk = callback || $.noop;
       if (!this.length) return <ChocolateChipElementArray>[];
       var ret = <ChocolateChipElementArray>[];
       var css = '';
@@ -813,7 +813,7 @@
         height: 0,
         padding: 0
       };
-      var transition = $['isWebkit'] ? '-webkit-transition' : 'transition';
+      var transition = $.isWebkit ? '-webkit-transition' : 'transition';
       this.each(function(ctx) {
         storedDimensions['padding'] = $(ctx).css('padding');
         storedDimensions['height'] = $(ctx).css('height');
@@ -858,12 +858,12 @@
         }
         ret.push(ctx);
       });
-      return $['returnResult'](ret)
+      return $.returnResult(ret)
     },
 
     show: function ( speed: any, callback?: Function ) {
       if (!this.length) return <ChocolateChipElementArray>[];
-      var cbk = callback || $['noop'];
+      var cbk = callback || $.noop;
       var createCSSAnim = function(opacity, height, padding) {
         return {
           opacity: opacity,

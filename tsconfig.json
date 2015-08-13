@@ -22,5 +22,8 @@
         "src/typescript/strings.ts",
         "src/typescript/template.ts",
         "src/typescript/utils.ts"
+    ],
+    "exclude": [
+      "typings"
     ]
 }

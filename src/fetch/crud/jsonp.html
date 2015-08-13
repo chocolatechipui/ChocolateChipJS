@@ -14,7 +14,6 @@
       $.jsonp('https://api.github.com/users/rbiggs/repos?name=chipper', {timeout: 10000})
       .then($.json)
       .then(function(obj) {
-        console.log(obj)
         obj.data.forEach(function(repo) {
           $('#message_ajax').append("<li>" + repo.name + "</li>");
         });

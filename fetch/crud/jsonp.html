@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>JSONP</title>
   <link rel="stylesheet" href="../css/styles.css">
-  <script src="../js/chocolatechipjs-4.0.1.js"></script>
+  <script src="../js/chocolatechipjs-4.0.2.js"></script>
   <script>
   /// <reference path='../../typings/chocolatechipjs/chocolatechipjs.d.ts' />
   $(function() {
@@ -14,7 +14,6 @@
       $.jsonp('https://api.github.com/users/rbiggs/repos?name=chipper', {timeout: 10000})
       .then($.json)
       .then(function(obj) {
-        console.log(obj)
         obj.data.forEach(function(repo) {
           $('#message_ajax').append("<li>" + repo.name + "</li>");
         });
