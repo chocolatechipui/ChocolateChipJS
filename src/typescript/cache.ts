@@ -1,6 +1,6 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
-(($) => {
+(($: ChocolateChipStatic) => {
   $.extend({
     chch_cache : {
       data: {},
@@ -85,4 +85,4 @@
       }
     }
   });
-})(chocolatechipjs);
+})(<any>chocolatechipjs);

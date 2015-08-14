@@ -1,6 +1,6 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
-(($) => {
+(($: ChocolateChipStatic) => {
   var slice = <T>(elements: T) => [].slice.apply(elements);
 
   $.fn.extend({
@@ -356,7 +356,7 @@
       var ret = <ChocolateChipElementArray>[];
       this.each((ctx) => ret.push(ctx.parentNode));
       ret = ret.unique();
-      return $.returnResult(ret)
+      return <ChocolateChipElementArray>$.returnResult(ret)
     },
 
     ancestor: function ( selector: any ): ChocolateChipElementArray {
@@ -497,7 +497,7 @@
         if (!this.length) return <ChocolateChipElementArray>[];
         this.each((ctx) => {
             var tempNode = $.make(string);
-            tempNode = tempNode[0];
+            tempNode = <any>tempNode[0];
             var whichClone = $(ctx).clone(true);
             $(tempNode).append(whichClone);
             ctx.parentNode.insertBefore(tempNode, ctx.nextSibling);
@@ -531,7 +531,7 @@
           ret.push(ctx.cloneNode(false));
         }
       });
-      return $.returnResult(ret)
+      return <ChocolateChipElementArray>$.returnResult(ret)
     },
 
     css: function ( property: any, value?: string ): string | ChocolateChipElementArray {
@@ -558,7 +558,7 @@
           ret.push(node);
         });
       }
-      return $.returnResult(ret)
+      return <ChocolateChipElementArray>$.returnResult(ret)
     },
 
     width: function ( ): number {
@@ -590,7 +590,7 @@
         ctx.textContent = '';
         ret.push(ctx);
       });
-      return $.returnResult(ret)
+      return <ChocolateChipElementArray>$.returnResult(ret)
     },
 
     html: function ( content: string ): ChocolateChipElementArray {
@@ -610,7 +610,7 @@
       this.each(function(node) {
         __html(node, content);
       });
-      return $.returnResult(ret)
+      return <ChocolateChipElementArray>$.returnResult(ret)
     },
 
     text: function ( string?: string ): any {
@@ -674,7 +674,7 @@
         }
         ret.push(node);
       });
-      return $.returnResult(ret);
+      return <ChocolateChipElementArray>$.returnResult(ret);
     },
 
     hasClass: function ( className: string ): ChocolateChipElementArray {
@@ -696,7 +696,7 @@
           ret.push(node);
         }
       });
-      return $.returnResult(ret)
+      return <ChocolateChipElementArray>$.returnResult(ret)
     },
 
     removeClass: function ( className: string ): ChocolateChipElementArray {
@@ -718,7 +718,7 @@
         }
         ret.push(node);
       });
-      return $.returnResult(ret);
+      return <ChocolateChipElementArray>$.returnResult(ret);
     },
 
     toggleClass: function ( className: string ): ChocolateChipElementArray {
@@ -728,7 +728,7 @@
         node.classList.toggle(className);
         ret.push(node);
       });
-      return $.returnResult(ret)
+      return <ChocolateChipElementArray>$.returnResult(ret)
     },
     
     attr: function ( property: string, value?: string ): string | ChocolateChipElementArray {
@@ -764,7 +764,7 @@
           ret.push(node);
         }
       });
-      return $.returnResult(ret)
+      return <ChocolateChipElementArray>$.returnResult(ret)
     },
 
     removeAttr: function ( attribute: string ): ChocolateChipElementArray {
@@ -776,7 +776,7 @@
           ret.push(node);
         }
       });
-      return $.returnResult(ret)
+      return <ChocolateChipElementArray>$.returnResult(ret)
     },
 
     disable: function ( ): ChocolateChipElementArray {
@@ -787,7 +787,7 @@
         node.setAttribute('disabled', true);
         node.style.cursor = 'default';
       });
-      return $.returnResult(ret)
+      return <ChocolateChipElementArray>$.returnResult(ret)
     },
 
     enable: function ( ): ChocolateChipElementArray {
@@ -798,7 +798,7 @@
         node.removeAttribute('disabled');
         node.style.cursor = 'auto';
       });
-      return $.returnResult(ret)
+      return <ChocolateChipElementArray>$.returnResult(ret)
     },
 
     hide: function ( speed: any, callback?: Function ): ChocolateChipElementArray {
@@ -858,7 +858,7 @@
         }
         ret.push(ctx);
       });
-      return $.returnResult(ret)
+      return <ChocolateChipElementArray>$.returnResult(ret)
     },
 
     show: function ( speed: any, callback?: Function ) {
@@ -949,4 +949,4 @@
     }
 
   });
-})(chocolatechipjs);
+})(<any>chocolatechipjs);

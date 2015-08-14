@@ -1,6 +1,6 @@
 /// <reference path="../typings/chocolatechipjs/chocolatechipjs.d.ts"/> />
 /// <reference path='core.ts' />
-(($) => {
+(($: ChocolateChipStatic) => {
   $.extend({
 
     subscriptions: {},
@@ -47,4 +47,4 @@
     }
 
   });
-})(chocolatechipjs);
+})(<any>chocolatechipjs);

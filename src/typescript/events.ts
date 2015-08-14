@@ -1,6 +1,6 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
-(($) => {
+(($: ChocolateChipStatic) => {
   $.fn.extend({
       bind : function ( event: string, callback: Function, capturePhase?: boolean ): ChocolateChipElementArray {
         if (!this.length) return <ChocolateChipElementArray>[];
@@ -52,7 +52,7 @@
 
       undelegate : function ( selector: any, event: string, callback: Function, capturePhase?: boolean ): any {
         if (!this.length) return <ChocolateChipElementArray>[];
-        this.each((ctx) => $(ctx).unbind(event, callback, capturePhase));
+        this.each((ctx) => $(ctx).unbind(event, <any>callback, capturePhase));
       },
 
       on : function ( event: any, selector: any, callback: any, capturePhase?: boolean ): ChocolateChipElementArray {
@@ -128,4 +128,4 @@
         });
       }
   });
-})(chocolatechipjs);
+})(<any>chocolatechipjs);

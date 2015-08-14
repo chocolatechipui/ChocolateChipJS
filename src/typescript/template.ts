@@ -1,6 +1,6 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
-(($) => {
+(($: ChocolateChipStatic) => {
   $.extend({
 
     templates: {},
@@ -62,4 +62,4 @@
      }
    }
   };
-})(chocolatechipjs);
+})(<any>chocolatechipjs);

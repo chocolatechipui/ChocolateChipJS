@@ -1,7 +1,7 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
 
-(($) => {
+(($: ChocolateChipStatic) => {
   $.extend(chocolatechipjs, {
 
     isiPhone : /iphone/img.test(navigator.userAgent),
@@ -35,7 +35,7 @@
     isNativeAndroid : ((/samsung/img.test(navigator.userAgent) || /Galaxy Nexus/img.test(navigator.userAgent) || /HTC/img.test(navigator.userAgent) || /LG/img.test(navigator.userAgent)) && !/trident/img.test(navigator.userAgent) && !/edge/img.test(navigator.userAgent) &&  /android/i.test(navigator.userAgent) && /webkit/i.test(navigator.userAgent))
 
   });
-})(chocolatechipjs);
+})(<any>chocolatechipjs);
 interface Navigator {
   standalone: boolean;
 }

@@ -136,12 +136,14 @@ gulp.task('tests', function() {
     .pipe(gulp.dest('examples/'));
 
   gulp.src(["./src/typings/chocolatechipjs/chocolatechipjs.d.ts"])
-   .pipe(footer("\ndeclare var chocolatechipjs: ChocolateChipStatic;"))
+    .pipe(footer("\ndeclare var chocolatechipjs: ChocolateChipStatic;"))
     .pipe(gulp.dest(pkg.projectPath + './typings/chocolatechipjs'));
   gulp.src(["./src/typings/tsd.d.ts"])
     .pipe(gulp.dest(pkg.projectPath + './typings/'));
   gulp.src("./src/typings/tsd.json")
     .pipe(gulp.dest('./'));
+  gulp.src("./src/typings/qunit/qunit.d.ts")
+    .pipe(gulp.dest(pkg.projectPath + './typings/qunit'))
   
   gulp.src([
     './src/fetch/*/**',

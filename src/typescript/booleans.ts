@@ -1,6 +1,6 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
-(($) => {
+(($: ChocolateChipStatic) => {
   $.extend({
     isString: ( str: any ): boolean => {
       return typeof str === 'string';
@@ -34,4 +34,4 @@
       return (typeof number === 'number' && number % 1 !== 0);
     }
   });
-})(chocolatechipjs);
+})(<any>chocolatechipjs);

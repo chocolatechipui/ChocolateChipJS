@@ -1,6 +1,6 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
-(($) => {
+(($: ChocolateChipStatic) => {
   var slice = (elements: NodeList) => [].slice.apply(elements);
   $.extend($, {
 
@@ -21,7 +21,7 @@
       });
     },
 
-    makeUuid: (): string => $.uuidNum(),
+    makeUuid: () => $.uuidNum(),
 
     uuid: 0,
 
@@ -106,4 +106,4 @@
     }
 
   });
-})(chocolatechipjs);
+})(<any>chocolatechipjs);
