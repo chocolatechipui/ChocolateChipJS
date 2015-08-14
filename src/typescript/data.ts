@@ -1,7 +1,7 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
 /// <reference path='cache.ts' />
-(($) => {
+(($: ChocolateChipStatic) => {
   chocolatechipjs.fn.extend({
     data : function ( key: string, value?: number | string ): string | ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
@@ -54,7 +54,7 @@
       return $['returnResult'](ret)
     },
     
-    removeData : function ( key: string ): ChocolateChipElementArray {
+    removeData : function ( key?: string ): ChocolateChipElementArray {
       if (!this.length) return <ChocolateChipElementArray>[];
       this.each((ctx) => {
         var id = ctx.getAttribute('id');
@@ -77,4 +77,4 @@
       });
     }
   });
-})(chocolatechipjs);
+})(<any>chocolatechipjs);

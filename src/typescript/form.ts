@@ -1,6 +1,6 @@
 /// <reference path='../typings/chocolatechipjs/chocolatechipjs.d.ts' />
 /// <reference path='core.ts' />
-(($) => {
+(($: ChocolateChipStatic) => {
   "use strict";
   $.extend($, {  
     serialize: ( element ) => {
@@ -154,4 +154,4 @@
       return <JSON>result;
     }
   });
-})(chocolatechipjs);
+})(<any>chocolatechipjs);

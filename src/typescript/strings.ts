@@ -1,6 +1,6 @@
 /// <reference path='../typings/tsd.d.ts' />
 /// <reference path='core.ts' />
-(($) => {
+(($: ChocolateChipStatic) => {
   $.extend({
     camelize: function ( string: string ): string {
       if (typeof string !== 'string') return;
@@ -32,4 +32,4 @@
       return str.split(' ');
     }
   });
-})(chocolatechipjs);
+})(<any>chocolatechipjs);
