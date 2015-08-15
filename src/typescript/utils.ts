@@ -85,10 +85,10 @@
       return $.delay.apply($, [func, 1].concat([].slice.call(arguments, 1)));
     },
 
-    returnResult: ( result ): Array<any> => {
+    returnResult: <T extends lengthInterface>( result: T ): Array<any> => {
       if (typeof result === 'string') return <any>[];
       if (result && result.length && result[0] === undefined) return <any>[];
-      if (result && result.length) return result;
+      if (result && result.length) return <any>result;
       else return <any>[];
     },
 
@@ -107,3 +107,7 @@
 
   });
 })(<any>chocolatechipjs);
+
+interface lengthInterface {
+    length?: number;
+}
