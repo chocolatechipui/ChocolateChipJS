@@ -522,7 +522,7 @@ interface ChocolateChipStatic {
      *
      */
     data: {
-      repeaterName: any;
+      repeaterName?: any;
     };
 
     /**
