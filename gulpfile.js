@@ -155,8 +155,20 @@ gulp.task('tests', function() {
     .pipe(gulp.dest('fetch/js'));
 });
 
+gulp.task('test-types', function() {
+  var files = gulp.src('src/typings/type-tests/chocolatechipjs-tests.ts');
+  
+  var tsResult = files.pipe(ts({
+    noImplicitAny: false,
+    target: 'es5',
+    removeComments: true,
+    out: 'chocolatechipjs-tests.js'
+  }));
+  return tsResult.js.pipe(gulp.dest('src/typings/type-tests/'));
+});
+
 /* 
    Define default task:
    To build, just enter gulp in terminal.
 */
-gulp.task('default', ['build', 'tests']);
+gulp.task('default', ['build', 'tests', 'test-types']);
