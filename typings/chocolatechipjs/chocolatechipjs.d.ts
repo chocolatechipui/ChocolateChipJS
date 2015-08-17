@@ -198,7 +198,7 @@ interface ChocolateChipStatic {
    * This method makes sure a method always returns an array. If no values are available to return, it returns and empty array. This is to make sure that methods that expect a chainable array will not throw and exception.
    *
    * @param result The result of a method to test if it can be returned in an array.
-   * @return An array hold the results of a method, otherwise an empty array.
+   * @return An array holding the results of a method, otherwise an empty array.
    */
   returnResult(result: HTMLElement[]): any[];
 
