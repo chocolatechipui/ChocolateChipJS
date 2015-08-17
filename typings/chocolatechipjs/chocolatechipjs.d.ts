@@ -176,7 +176,8 @@ interface ChocolateChipStatic {
    * @param response The response from a Promise.
    * @result
    */
-   json(reponse: Response): JSON;
+  json(reponse: Response): JSON;
+
   /**
    * This method will defer the execution of a function until the call stack is clear.
    *

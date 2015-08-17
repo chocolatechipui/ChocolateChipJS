@@ -1324,34 +1324,30 @@ declare type OpenEndedDictionary = Object;
  * @return Promise.
  */
 interface fetch {
-  (
-  /**
-   * @param input The url to target.
-   */
-  input: string,
-  init?: {
-   method?: string;
-   headers?: {};
-   body?: any;
-   mode?:  {
-     cors: string;
-     "no-cors": string;
-     "same-origin": string;
-   };
-   credentials?: {
-     omit: string;
-     "same-origin": string;
-     include: string;
-   };
-   cache?: {
-     default: string;
-     "no-store": string;
-     reload: string;
-     "no-cache": string;
-     "force-cache": string;
-     "only-if-cached": string;
-   };
-   timeout?: number;
+  (input: string,
+    init?: {
+    method?: string;
+    headers?: {};
+    body?: any;
+    mode?:  {
+      cors: string;
+      "no-cors": string;
+      "same-origin": string;
+    };
+    credentials?: {
+      omit: string;
+      "same-origin": string;
+      include: string;
+    };
+    cache?: {
+      default: string;
+      "no-store": string;
+      reload: string;
+      "no-cache": string;
+      "force-cache": string;
+      "only-if-cached": string;
+    };
+    timeout?: number;
   }): Promise<any>;
 }
 
