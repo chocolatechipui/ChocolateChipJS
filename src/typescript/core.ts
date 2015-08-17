@@ -1,5 +1,5 @@
 /// <reference path='../typings/tsd.d.ts' />
-function chocolatechipjs <ChocolateChipStatic>( selector?:Document|Function|any, context?:any ) {
+function chocolatechipjs <ChocolateChipStatic>( selector?: Document | Function | any, context?: any ) {
   var idRE = /^#([\w-]*)$/;
   var classRE = /^\.([\w-]+)$/;
   var tagRE = /^[\w-]+$/;
