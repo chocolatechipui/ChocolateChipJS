@@ -85,7 +85,13 @@ function chocolatechipjs <ChocolateChipStatic>( selector?: Document | Function |
       }
     }
   } else if (selector instanceof Array) {
-    return selector;
+    var node;
+    selector.every(function(ctx) {
+      if (!ctx.nodeType) {
+        node = "false";
+      }
+    });
+    return (node === 'false') ? [] : selector;
   } else if (/NodeListConstructor/i.test(selector.constructor.toString())) {
     return slice(selector);
   } else if (selector === window) {

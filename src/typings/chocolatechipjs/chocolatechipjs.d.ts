@@ -1,4 +1,4 @@
-// Type definitions for chocolatechip v4.0.2
+// Type definitions for chocolatechip v4.0.3
 // Project: https://github.com/chocolatechipui/ChocolateChipJS
 // Definitions by: Robert Biggs <http://chocolatechip-ui.com>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -837,12 +837,12 @@ interface ChocolateChipElementArray extends Array<HTMLElement> {
   hasAttr(attributeName: string): ChocolateChipElementArray;
 
   /**
-   * Get the value of an attribute for the first element in the set of matched elements.
+   * Test whether an attribute exists on the first element in the set of matched elements. The value returned is a boolean.
    *
    * @param attributeName The name of the attribute to get.
-   * @return string
+   * @return boolean
    */
-  prop(attributeName: string): string;
+  prop(propertyName: string): boolean;
 
   /**
    * Set an property for the set of matched elements.
@@ -851,7 +851,15 @@ interface ChocolateChipElementArray extends Array<HTMLElement> {
    * @param value A string indicating the value to set the property to.
    * @return HTMLElement[]
    */
-  prop(propertyName: string, value: string): ChocolateChipElementArray;
+  prop(propertyName: string, value: any | boolean): ChocolateChipElementArray;
+  
+  /**
+   * Remove an element property.
+   * 
+   * @param property The property to remove.
+   * @return HTMLElement[]
+   */
+   removeProp(property: string): ChocolateChipElementArray;
 
   /**
    * Adds the specified class(es) to each of the set of matched elements.
@@ -1324,34 +1332,30 @@ declare type OpenEndedDictionary = Object;
  * @return Promise.
  */
 interface fetch {
-  (
-  /**
-   * @param input The url to target.
-   */
-  input: string,
-  init?: {
-   method?: string;
-   headers?: {};
-   body?: any;
-   mode?:  {
-     cors: string;
-     "no-cors": string;
-     "same-origin": string;
-   };
-   credentials?: {
-     omit: string;
-     "same-origin": string;
-     include: string;
-   };
-   cache?: {
-     default: string;
-     "no-store": string;
-     reload: string;
-     "no-cache": string;
-     "force-cache": string;
-     "only-if-cached": string;
-   };
-   timeout?: number;
+  (input: string,
+    init?: {
+    method?: string;
+    headers?: {};
+    body?: any;
+    mode?:  {
+      cors: string;
+      "no-cors": string;
+      "same-origin": string;
+    };
+    credentials?: {
+      omit: string;
+      "same-origin": string;
+      include: string;
+    };
+    cache?: {
+      default: string;
+      "no-store": string;
+      reload: string;
+      "no-cache": string;
+      "force-cache": string;
+      "only-if-cached": string;
+    };
+    timeout?: number;
   }): Promise<any>;
 }
 
