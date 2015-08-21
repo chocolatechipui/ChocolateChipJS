@@ -653,9 +653,23 @@
       }
     },
 
-    prop: function ( property: string, value?: string | number ) {
-      if (!this.length) return <ChocolateChipElementArray>[];
-      return this.attr(property, value);
+    prop: function(property: string, value?: boolean | string) {
+      if (!this.length) return [];
+      if (value === false) {
+        this[0][property] = false;
+        return [this[0]];
+      } else if (value) {
+        this[0][property] = property;
+        return [this[0]];
+      } else {
+        return this[0][property];
+      }
+    },
+    
+    removeProp: function(property: string) {
+      if (!this.length) return [];
+      this[0][property] = false; 
+      return [this[0]]
     },
 
     addClass: function ( className: string ): ChocolateChipElementArray {
