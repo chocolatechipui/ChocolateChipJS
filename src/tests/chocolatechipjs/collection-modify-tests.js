@@ -227,6 +227,32 @@ test('[].removeAttr:', function() {
    equal($('#setEvent').hasAttr('class').length, 0, 'Should return 0');
 });
 // 17
+test('[].prop:', function() {
+  equal($('input[type=checkbox]', '#qunit-fixture').eq(0).prop('checked'), true, 'Should be true');
+  equal($('input[type=checkbox]', '#qunit-fixture').eq(1).prop('checked'), false, 'Should be false');
+  $('input[type=checkbox]', '#qunit-fixture').eq(0).prop('checked', false);
+  equal($('input[type=checkbox]', '#qunit-fixture').eq(0).prop('checked'), false, 'Should be false');
+  $('input[type=checkbox]', '#qunit-fixture').eq(1).prop('checked', 123);
+  equal($('input[type=checkbox]', '#qunit-fixture').eq(1).prop('checked'), true, 'Should be true');
+  $('input[type=checkbox]', '#qunit-fixture').eq(0).prop('checked', [1]);
+  equal($('input[type=checkbox]', '#qunit-fixture').eq(0).prop('checked'), true, 'Should be true');
+  $('input[type=checkbox]', '#qunit-fixture').eq(1).prop('checked', false);
+  equal($('input[type=checkbox]', '#qunit-fixture').eq(1).prop('checked'), false, 'Should be false');
+});
+// 18
+test('[].removeProp:', function() {
+  $('input[type=checkbox]', '#qunit-fixture').eq(0).removeProp('checked');
+  equal($('input[type=checkbox]', '#qunit-fixture').eq(0).prop('checked'), false, 'Should be false');
+  $('input[type=checkbox]', '#qunit-fixture').eq(0).prop('checked', true);
+  equal($('input[type=checkbox]', '#qunit-fixture').eq(0).prop('checked'), true, 'Should be true');
+  $('input[type=checkbox]', '#qunit-fixture').eq(0).removeProp('checked');
+  equal($('input[type=checkbox]', '#qunit-fixture').eq(0).prop('checked'), false, 'Should be false');
+  $('input[type=checkbox]', '#qunit-fixture').eq(0).prop('disabled', true);
+  equal($('input[type=checkbox]', '#qunit-fixture').eq(0).prop('disabled'), true, 'Should be true');
+  $('input[type=checkbox]', '#qunit-fixture').eq(0).removeProp('disabled');
+  equal($('input[type=checkbox]', '#qunit-fixture').eq(0).prop('disabled'), false, 'Should be false');
+});
+// 19
 test('[].hasClass:', function() {
    equal([].hasClass().length, 0, 'Should have length of 0.');
    equal($.isArray([].hasClass()), true, 'Should return an array.');
@@ -235,7 +261,7 @@ test('[].hasClass:', function() {
    equal($('#setEvent').hasClass('whatever boring').length, 1, 'Should return 1.');
    equal($('#setEvent').hasClass('something else here'), 0, 'Should return 0.');
 });
-// 18
+// 20
 test('[].addClass:', function() {
    var list = $('#ul');
    equal([].addClass().length, 0, 'Should have length of 0.');
@@ -249,7 +275,7 @@ test('[].addClass:', function() {
    equal($.isArray(list.last().find('span').hasClass('This is a span')), true, 'Should return an array.');
    equal(list.last().find('span').hasClass('This is a span').length, 1, 'Should return 1.');
 });
-// 19
+// 21
 test('[].removeClass:', function() {
    var list = $('#ul');
    equal([].removeClass().length, 0, 'Should have length of 0.');
@@ -266,7 +292,7 @@ test('[].removeClass:', function() {
    equal($.isArray(ret), true, 'Should return an array.');
    equal(ret.length, 1, 'Should return 1');
 });
-// 20
+// 22
 test('[].toggleClass:', function() {
    var list = $('#ul');
    equal([].toggleClass().length, 0, 'Should have length of 0.');
@@ -289,7 +315,7 @@ test('[].toggleClass:', function() {
    list.toggleClass('toggled');
    equal(list.hasClass('toggled').length, 0, 'Should return 0.');
 });
-// 21
+// 23
 test('[].val:', function() {
    equal([].val().length, 0, 'Should have length of 0.');
    equal($.isArray([].val()), true, 'Should return an array.');
@@ -308,7 +334,7 @@ test('[].val:', function() {
    radios.eq(1).val('cheese');
    radios.eq(2).val('butter');
 });
-// 22
+// 24
 test('[].disable:', function() {
    equal([].disable().length, 0, 'Should have length of 0.');
    equal($.isArray([].disable()), true, 'Should return an array.');
@@ -327,7 +353,7 @@ test('[].disable:', function() {
    equal(checkboxes.eq(1).hasAttr('disabled').length, 1, 'Should return 1.');
    equal(checkboxes.eq(1).css('cursor'), 'default', 'Should return "default".');
 });
-// 23
+// 25
 test('[].enable:', function() {
    equal([].enable().length, 0, 'Should have length of 0.');
    equal($.isArray([].enable()), true, 'Should return an array.');
@@ -347,7 +373,7 @@ test('[].enable:', function() {
    equal(checkboxes.eq(1).hasAttr('disabled').length, 0, 'Should return 0.');
    equal(checkboxes.eq(1).css('cursor'), 'auto', 'Should return "auto".');
 });
-//24
+//26
 test('[].hide(no parameters):', function() {
    var elem = $('#setEvent2');
    equal([].hide().length, 0, 'Should have length of 0.');
@@ -362,7 +388,7 @@ test('[].hide(no parameters):', function() {
    equal(elem.css('visibility'), 'visible', 'Should be visible.');
    equal(elem.css('height'), '100px', 'Should be 100px.');
 });
-//25
+//27
 test('[].hide("slow"):', function() {
    var elem = $('#setEvent2');
    elem.css('height', '100px');
