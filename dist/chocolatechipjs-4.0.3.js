@@ -111,6 +111,8 @@ function chocolatechipjs(selector, context) {
     return slice(selector);
   } else if (selector === window) {
     return [];
+  } else {
+    return [];
   }
   return this;
 }
