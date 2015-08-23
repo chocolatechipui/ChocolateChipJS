@@ -62,7 +62,7 @@
     },
 
     require: ( src: string, callback: Function ): void => {
-      callback = callback || this.noop;
+      callback = callback || $.noop;
       var script = document.createElement('script');
       script.setAttribute('type', 'text/javascript');
       script.setAttribute('src', src);

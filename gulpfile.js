@@ -12,7 +12,6 @@ var header = require('gulp-header');
 var footer = require('gulp-footer');
 var ts = require('gulp-typescript');
 var beautify = require('gulp-jsbeautifier');
-var version = pkg.version;
 
 //Add Trailing slash to projectPath if not exists.
 if (pkg.projectPath !== "")
@@ -87,7 +86,7 @@ gulp.task('build', function () {
   
   return tsResult.js.pipe(replace("var chocolatechipjs;", ''))
   .pipe(replace(" \|\| (chocolatechipjs = \{\})", ''))
-  .pipe(replace(/VERSION_NUMBER/img, version ))
+  .pipe(replace(/VERSION_NUMBER/img, pkg.version ))
   .pipe(header(chocolatechipjsHeader, { pkg : pkg, chuiName: pkg.title }))
   .pipe(beautify({indentSize: 2}))
   .pipe(gulp.dest(pkg.projectPath + './dist'))

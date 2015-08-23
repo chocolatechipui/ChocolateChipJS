@@ -144,7 +144,6 @@ window.chocolatechipjs = chocolatechipjs;
 if (typeof window.$ === 'undefined') {
   window.$ = chocolatechipjs;
 }
-var _this = this;
 (function($) {
   var slice = function(elements) {
     return [].slice.apply(elements);
@@ -203,7 +202,7 @@ var _this = this;
       return;
     },
     require: function(src, callback) {
-      callback = callback || _this.noop;
+      callback = callback || $.noop;
       var script = document.createElement('script');
       script.setAttribute('type', 'text/javascript');
       script.setAttribute('src', src);
