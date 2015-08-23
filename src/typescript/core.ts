@@ -96,6 +96,8 @@ function chocolatechipjs <ChocolateChipStatic>( selector?: Document | Function |
     return slice(selector);
   } else if (selector === window) {
     return <ChocolateChipElementArray>[];
+  } else {
+    return <ChocolateChipElementArray>[];
   }
 
   return this;
