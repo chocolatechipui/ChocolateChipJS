@@ -1760,11 +1760,17 @@ if (typeof window.$ === 'undefined') {
     }
     try {
       if (_then = isThenable(msg)) {
-        deferred = new MakeDeferred(self);
-        _then.call(msg, function() {
-          resolve.apply(deferred, arguments);
-        }, function() {
-          reject.apply(deferred, arguments);
+        schedule(function() {
+          var deferred_wrapper = new MakeDeferred(self);
+          try {
+            _then.call(msg, function() {
+              resolve.apply(deferred_wrapper, arguments);
+            }, function() {
+              reject.apply(deferred_wrapper, arguments);
+            });
+          } catch (err) {
+            reject.call(deferred_wrapper, err);
+          }
         });
       } else {
         self.msg = msg;
@@ -1774,7 +1780,7 @@ if (typeof window.$ === 'undefined') {
         }
       }
     } catch (err) {
-      reject.call(deferred || (new MakeDeferred(self)), err);
+      reject.call(new MakeDeferred(self), err);
     }
   }
 
