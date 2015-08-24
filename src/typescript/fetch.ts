@@ -215,7 +215,7 @@ function isForbiddenMethod ( method: ByteString ): boolean {
       return this.text().then(JSON.parse);
     }
 
-    return this
+    return this;
   }
 
   // HTTP methods whose capitalization should be normalized
@@ -248,19 +248,18 @@ function isForbiddenMethod ( method: ByteString ): boolean {
       this.url = input;
     }
 
-    this.credentials = options.credentials || 'omit';
-    this.headers = new Headers(options.headers);
-    this.method = normalizeMethod(options.method || 'GET');
-    this.mode = options.mode || null;
+    this.credentials = options.credentials || this.credentials || 'omit';
+    if (options.headers || !this.headers) {
+      this.headers = new Headers(options.headers);
+    }
+    this.method = normalizeMethod(options.method || this.method || 'GET');
+    this.mode = options.mode || this.mode || null;
     this.referrer = null;
 
     if ((this.method === 'GET' || this.method === 'HEAD') && body) {
       throw new TypeError('Body not allowed for GET or HEAD requests');
     }
-    if(isForbiddenMethod(this.method)) {
-      throw new TypeError("forbidden method " + this.method);
-    }
-    this._initBody(options.body);
+    this._initBody(body);
   }
 
   function decode ( body ): FormData {
@@ -288,7 +287,7 @@ function isForbiddenMethod ( method: ByteString ): boolean {
     return head;
   }
 
-  Body.call(Request.prototype)
+  Body.call(Request.prototype);
 
   function Response ( bodyInit, options ) {
     if (!options) {

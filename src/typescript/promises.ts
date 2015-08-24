@@ -6,7 +6,7 @@
  var cycle;
  var queue;
 
-  extend = (obj, name, val, config): Object => {
+ extend = (obj, name, val, config): Object => {
     return Object.defineProperty(obj, name, {
       value: val,
       writable: true,
@@ -28,8 +28,7 @@
        item = new Item(func, self);
        if (last) {
          last.next = item;
-       }
-       else {
+       } else {
          first = item;
        }
        last = item;
@@ -47,7 +46,7 @@
    };
  })();
 
- function schedule ( func: Function, self ): void {
+ function schedule ( func: Function, self? ): void {
    queue.add(func, self);
    if (!cycle) {
      cycle = setTimeout(queue.unshift);
@@ -114,11 +113,17 @@
 
    try {
      if (_then = isThenable(msg)) {
-       deferred = new MakeDeferred(self);
-       _then.call(msg,
-         function() { resolve.apply(deferred, arguments); },
-         function() { reject.apply(deferred, arguments); }
-       );
+       schedule(function() {
+         var deferred_wrapper = new MakeDeferred(self);
+         try {
+           _then.call(msg,
+             function() { resolve.apply(deferred_wrapper, arguments); },
+             function() { reject.apply(deferred_wrapper, arguments); }
+           );
+         } catch (err) {
+           reject.call(deferred_wrapper, err);
+         }
+       });
      } else {
        self.msg = msg;
        self.state = 1;
@@ -128,7 +133,7 @@
      }
    }
    catch (err) {
-     reject.call(deferred || (new MakeDeferred(self)), err);
+     reject.call(new MakeDeferred(self), err);
    }
  }
 
