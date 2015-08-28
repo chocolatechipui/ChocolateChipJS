@@ -2541,7 +2541,6 @@ function isForbiddenMethod(method) {
     if (!element) {
       var repeaters = $('[data-repeater]');
       $.template.index = 0;
-      var imgSrc;
       var re = /data-src/img;
       repeaters.forEach(function(repeater) {
         var template = repeater.innerHTML;
