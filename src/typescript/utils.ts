@@ -11,7 +11,7 @@
     noop: (): void => {},
 
     uuidNum: (): string => {
-      var d = new Date().getTime();
+      var d = Date.now();
       var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
       var randomLetter = charset[Math.floor(Math.random() * charset.length)];
       return randomLetter +'xxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
