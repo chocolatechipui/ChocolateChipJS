@@ -32,8 +32,10 @@
    if (!element) {
      var repeaters = $('[data-repeater]');
      $.template.index = 0;
+     var re = /data-src/img
      repeaters.forEach((repeater) => {
        var template = repeater.innerHTML;
+       template = template.replace(re, 'src');
        var r = $(repeater);
        var d = r.attr('data-repeater');
        if (!d || !$.template.data[d]) {
