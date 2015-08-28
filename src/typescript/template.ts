@@ -32,7 +32,6 @@
    if (!element) {
      var repeaters = $('[data-repeater]');
      $.template.index = 0;
-     var imgSrc;
      var re = /data-src/img
      repeaters.forEach((repeater) => {
        var template = repeater.innerHTML;
