@@ -3,9 +3,6 @@ ChocolateChipJS
 
 ##A JavaScript Library for Mobile Web App Development
 
-![ChocolateChipJS: v4.0.4](http://chocolatechip-ui.com/image/badges//ChocolateChipJS.svg) ![License: Open Source](
-http://chocolatechip-ui.com/image/badges//license-MIT.svg)
-
 [TypeScript definitions on DefinitelyTyped](http://definitelytyped.org)
 
 The purpose of ChocolateChipJS is to use with ChocolateChip-UI. Of course, since it is so small and fast, you could use it as the basis for a simple mobile app, as you would with Zeptojs, etc. Please visit [ChocolateChip-UI's Website](http://chocolatechip-ui.com) for documentation on ChocolateChipJS. You can optionally build the ChocolateChip-UI framework with support for ChocolateChipJS. Please read the build instructions for [ChocolateChip-UI to learn more](http://chocolatechip-ui.com/documentation).
