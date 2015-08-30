@@ -3,8 +3,8 @@ ChocolateChipJS
 
 ##A JavaScript Library for Mobile Web App Development
 
-![ChocolateChipJS: v4.0.4](src/badges/ChocolateChipJS.svg) ![License: Open Source](
-src/badges/license-MIT.svg)
+![ChocolateChipJS: v4.0.4](http://chocolatechip-ui.com/image/badges//ChocolateChipJS.svg) ![License: Open Source](
+http://chocolatechip-ui.com/image/badges//license-MIT.svg)
 
 [TypeScript definitions on DefinitelyTyped](http://definitelytyped.org)
 
